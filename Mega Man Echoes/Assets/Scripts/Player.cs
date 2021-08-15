@@ -17,6 +17,10 @@ public class Player : MonoBehaviour
 	};
 	private Facing facing;
 	
+	private bool jumpBuffer;
+	public float jumpBufferTime;
+	private float jumpBufferTimer;
+	
 	private Vector2 dashTarget;
 	private Vector2 dashStart;
 	
@@ -72,7 +76,7 @@ public class Player : MonoBehaviour
 						dashTarget = new Vector2(transform.position.x + dashDistance, transform.position.y);
 					}
 				}
-				else if(Input.GetButtonDown("Jump") && onGround) // Jumping
+				else if(jumpBuffer && onGround) // Jumping
 				{
 					//state = State.Jump;
 					yVelocity = jumpSpeed;
@@ -80,7 +84,7 @@ public class Player : MonoBehaviour
 				
 				break;
 			case State.Jump:
-				Move();
+				Move(); // Allow horizontal movement while jumping
 				
 				
 				
@@ -104,6 +108,8 @@ public class Player : MonoBehaviour
 			yVelocity -= gravity * Time.deltaTime;
 		}
 		
+		jumpBuffering();
+		
 		rb2d.velocity = new Vector2(xVelocity, yVelocity);
     }
 	
@@ -120,6 +126,23 @@ public class Player : MonoBehaviour
 	public void StopFall()
 	{
 		yVelocity = 0;
+	}
+	
+	void jumpBuffering()
+	{
+		if(Input.GetButtonDown("Jump"))
+		{
+			jumpBufferTimer = jumpBufferTime;
+		}
+		if(jumpBufferTimer > 0)
+		{
+			jumpBuffer = true;
+			jumpBufferTimer -= Time.deltaTime;
+		}
+		else
+		{
+			jumpBuffer = false;
+		}
 	}
 	
 	void Move()
