@@ -1,0 +1,1976 @@
+fileFormatVersion: 2
+guid: df00ee36d35a2e94c9b05ace0394929d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8158581128106831208
+    second: Ring_tiles (1)_0
+  - first:
+      213: -9120333338612549103
+    second: Ring_tiles (1)_1
+  - first:
+      213: -566057790893538308
+    second: Ring_tiles (1)_2
+  - first:
+      213: 6973353903732270810
+    second: Ring_tiles (1)_3
+  - first:
+      213: 4263629473101667528
+    second: Ring_tiles (1)_4
+  - first:
+      213: 3637331213652556227
+    second: Ring_tiles (1)_5
+  - first:
+      213: -6543548217786325526
+    second: Ring_tiles (1)_6
+  - first:
+      213: 8821295683016055159
+    second: Ring_tiles (1)_7
+  - first:
+      213: -5123918904361702252
+    second: Ring_tiles (1)_8
+  - first:
+      213: -8893268241493276339
+    second: Ring_tiles (1)_9
+  - first:
+      213: -8730161445503430658
+    second: Ring_tiles (1)_10
+  - first:
+      213: 3545163111986586430
+    second: Ring_tiles (1)_11
+  - first:
+      213: -5330727883747633094
+    second: Ring_tiles (1)_12
+  - first:
+      213: -3656598644087605016
+    second: Ring_tiles (1)_13
+  - first:
+      213: -222896950799531975
+    second: Ring_tiles (1)_14
+  - first:
+      213: 6907568041679463975
+    second: Ring_tiles (1)_15
+  - first:
+      213: 6152315692394505830
+    second: Ring_tiles (1)_16
+  - first:
+      213: 145635974760391618
+    second: Ring_tiles (1)_17
+  - first:
+      213: -3138182490835624420
+    second: Ring_tiles (1)_18
+  - first:
+      213: 8046691125598645888
+    second: Ring_tiles (1)_19
+  - first:
+      213: 366716439790249799
+    second: Ring_tiles (1)_20
+  - first:
+      213: -4973720710162305587
+    second: Ring_tiles (1)_21
+  - first:
+      213: -5123295896621239604
+    second: Ring_tiles (1)_22
+  - first:
+      213: -5982314047737884015
+    second: Ring_tiles (1)_23
+  - first:
+      213: 708687455493227984
+    second: Ring_tiles (1)_24
+  - first:
+      213: -188268450262133066
+    second: Ring_tiles (1)_25
+  - first:
+      213: -1690316285824113109
+    second: Ring_tiles (1)_26
+  - first:
+      213: -576997067329291969
+    second: Ring_tiles (1)_27
+  - first:
+      213: -7761251008572969042
+    second: Ring_tiles (1)_28
+  - first:
+      213: 7107355226056323077
+    second: Ring_tiles (1)_29
+  - first:
+      213: 7782365796163305834
+    second: Ring_tiles (1)_30
+  - first:
+      213: -6612470115603117594
+    second: Ring_tiles (1)_31
+  - first:
+      213: 5222372971596538938
+    second: Ring_tiles (1)_32
+  - first:
+      213: 98255365392354062
+    second: Ring_tiles (1)_33
+  - first:
+      213: 3672406763283320970
+    second: Ring_tiles (1)_34
+  - first:
+      213: 2427993237902606918
+    second: Ring_tiles (1)_35
+  - first:
+      213: -5654669645678277682
+    second: Ring_tiles (1)_36
+  - first:
+      213: -2358504208611715596
+    second: Ring_tiles (1)_37
+  - first:
+      213: -9008923175595717100
+    second: Ring_tiles (1)_38
+  - first:
+      213: 2115424409047664003
+    second: Ring_tiles (1)_39
+  - first:
+      213: -4958152743358638847
+    second: Ring_tiles (1)_40
+  - first:
+      213: -2481458295915281839
+    second: Ring_tiles (1)_41
+  - first:
+      213: -7420480600763621038
+    second: Ring_tiles (1)_42
+  - first:
+      213: -3782409522602260061
+    second: Ring_tiles (1)_43
+  - first:
+      213: 6953667642167920638
+    second: Ring_tiles (1)_44
+  - first:
+      213: 8911762070802169660
+    second: Ring_tiles (1)_45
+  - first:
+      213: 2365867177775343869
+    second: Ring_tiles (1)_46
+  - first:
+      213: 678305251268543515
+    second: Ring_tiles (1)_47
+  - first:
+      213: 6688408596095083691
+    second: Ring_tiles (1)_48
+  - first:
+      213: -6867535297148089896
+    second: Ring_tiles (1)_49
+  - first:
+      213: -8012224734617873884
+    second: Ring_tiles (1)_50
+  - first:
+      213: 183470504321094659
+    second: Ring_tiles (1)_51
+  - first:
+      213: 5106537666663891747
+    second: Ring_tiles (1)_52
+  - first:
+      213: 4422703296541365756
+    second: Ring_tiles (1)_53
+  - first:
+      213: -2921697168236143950
+    second: Ring_tiles (1)_54
+  - first:
+      213: -3795317950552233277
+    second: Ring_tiles (1)_55
+  - first:
+      213: 7414369314671594232
+    second: Ring_tiles (1)_56
+  - first:
+      213: 1169675111625013400
+    second: Ring_tiles (1)_57
+  - first:
+      213: 3245197481151634483
+    second: Ring_tiles (1)_58
+  - first:
+      213: -1581485822294430761
+    second: Ring_tiles (1)_59
+  - first:
+      213: 1672544439273873882
+    second: Ring_tiles (1)_60
+  - first:
+      213: -5246452711865157682
+    second: Ring_tiles (1)_61
+  - first:
+      213: 6650193091253418731
+    second: Ring_tiles (1)_62
+  - first:
+      213: 1960726768879472888
+    second: Ring_tiles (1)_63
+  - first:
+      213: 3906124059277683436
+    second: Ring_tiles (1)_64
+  - first:
+      213: 9112742909445344164
+    second: Ring_tiles (1)_65
+  - first:
+      213: -6797520766688384232
+    second: Ring_tiles (1)_66
+  - first:
+      213: 6005910308963335937
+    second: Ring_tiles (1)_67
+  - first:
+      213: -5737251934624815759
+    second: Ring_tiles (1)_68
+  - first:
+      213: -2427594258000338755
+    second: Ring_tiles (1)_69
+  - first:
+      213: -9151395063769089639
+    second: Ring_tiles (1)_70
+  - first:
+      213: -3360200277069941328
+    second: Ring_tiles (1)_71
+  - first:
+      213: -3070075385263985781
+    second: Ring_tiles (1)_72
+  - first:
+      213: 6640979647565946386
+    second: Ring_tiles (1)_73
+  - first:
+      213: 7008410528423875862
+    second: Ring_tiles (1)_74
+  - first:
+      213: -5417071547767265973
+    second: Ring_tiles (1)_75
+  - first:
+      213: 5357140867674961665
+    second: Ring_tiles (1)_76
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Ring_tiles (1)_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 157
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8929cf3a0b5e6ce80800000000000000
+      internalID: -8158581128106831208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_1
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 157
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11ab8de66211e6180800000000000000
+      internalID: -9120333338612549103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_2
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 157
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf3c2733075f428f0800000000000000
+      internalID: -566057790893538308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_3
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 157
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad6ab05dd6456c060800000000000000
+      internalID: 6973353903732270810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_4
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 157
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cc5c168a647b2b30800000000000000
+      internalID: 4263629473101667528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_5
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 157
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c97338a7756a7230800000000000000
+      internalID: 3637331213652556227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_6
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 157
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae5a43ca095a035a0800000000000000
+      internalID: -6543548217786325526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_7
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 157
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 779dbdcbfa98b6a70800000000000000
+      internalID: 8821295683016055159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_8
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 157
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49cac9777ee24e8b0800000000000000
+      internalID: -5123918904361702252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_9
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 157
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d49c78527a3c49480800000000000000
+      internalID: -8893268241493276339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_10
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 140
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eff05f07b6c38d680800000000000000
+      internalID: -8730161445503430658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_11
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 140
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3367c83113f23130800000000000000
+      internalID: 3545163111986586430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_12
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 140
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a38d3feab337506b0800000000000000
+      internalID: -5330727883747633094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_13
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 140
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e8bbfc18e6214dc0800000000000000
+      internalID: -3656598644087605016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_14
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 140
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 930831a776c18ecf0800000000000000
+      internalID: -222896950799531975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_15
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 140
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 726252a398c9cdf50800000000000000
+      internalID: 6907568041679463975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_16
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 140
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6666c3f968a616550800000000000000
+      internalID: 6152315692394505830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_17
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 140
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c36c1eb527650200800000000000000
+      internalID: 145635974760391618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_18
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 140
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1e5461c6afe274d0800000000000000
+      internalID: -3138182490835624420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 140
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08e689e02f69baf60800000000000000
+      internalID: 8046691125598645888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 122
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7476ef6b8a6d61500800000000000000
+      internalID: 366716439790249799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_21
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 122
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcda5c2bd5bc9fab0800000000000000
+      internalID: -4973720710162305587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_22
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 122
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc2bca2c68566e8b0800000000000000
+      internalID: -5123295896621239604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_23
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 122
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19211c9b11d8afca0800000000000000
+      internalID: -5982314047737884015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_24
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 122
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d503796c73c5d900800000000000000
+      internalID: 708687455493227984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_25
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 122
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b656bb87d2236df0800000000000000
+      internalID: -188268450262133066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_26
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 122
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2665613b4aca88e0800000000000000
+      internalID: -1690316285824113109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_27
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 122
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f39356d69381ef7f0800000000000000
+      internalID: -576997067329291969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_28
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 122
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eafad5d145f7a4490800000000000000
+      internalID: -7761251008572969042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_29
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 122
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5007a95fbe562a260800000000000000
+      internalID: 7107355226056323077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_30
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 105
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a61c6787574800c60800000000000000
+      internalID: 7782365796163305834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_31
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 105
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e90797d679cb34a0800000000000000
+      internalID: -6612470115603117594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_32
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 105
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a34ec906c88997840800000000000000
+      internalID: 5222372971596538938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_33
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 105
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0bcc77fbb21d5100800000000000000
+      internalID: 98255365392354062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_34
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 105
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a809e347e7207f230800000000000000
+      internalID: 3672406763283320970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_35
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 105
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6424c3e5cf6f1b120800000000000000
+      internalID: 2427993237902606918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_36
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 105
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecb892fbae39681b0800000000000000
+      internalID: -5654669645678277682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_37
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 105
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f55f6c0be8e44fd0800000000000000
+      internalID: -2358504208611715596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_38
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 105
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41e45d56a10e9f280800000000000000
+      internalID: -9008923175595717100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_39
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 105
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3850a72ca4f7b5d10800000000000000
+      internalID: 2115424409047664003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 87
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 105dafd695a113bb0800000000000000
+      internalID: -4958152743358638847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_41
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 70
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1520603c3d6109dd0800000000000000
+      internalID: -2481458295915281839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 52
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 251aec08538250990800000000000000
+      internalID: -7420480600763621038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_43
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 35
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a9cc3a449e228bc0800000000000000
+      internalID: -3782409522602260061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_44
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 87
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef70c81e0e3608060800000000000000
+      internalID: 6953667642167920638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_45
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 70
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3f76f80360fcab70800000000000000
+      internalID: 8911762070802169660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_46
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 52
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df82e0dc9af35d020800000000000000
+      internalID: 2365867177775343869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_47
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 35
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b14c42f3803d96900800000000000000
+      internalID: 678305251268543515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_48
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 87
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba4aae27e2002dc50800000000000000
+      internalID: 6688408596095083691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_49
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 70
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d90803780d91b0a0800000000000000
+      internalID: -6867535297148089896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_50
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 52
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 422d080fd0cdec090800000000000000
+      internalID: -8012224734617873884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_51
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 35
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30412dc9371db8200800000000000000
+      internalID: 183470504321094659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_52
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 87
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32347a5c3f01ed640800000000000000
+      internalID: 5106537666663891747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_53
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 70
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf51c493739906d30800000000000000
+      internalID: 4422703296541365756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_54
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 52
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ba1502c7eb0477d0800000000000000
+      internalID: -2921697168236143950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_55
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 35
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3caaba3be62545bc0800000000000000
+      internalID: -3795317950552233277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_56
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 35
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fa8e82db9125e660800000000000000
+      internalID: 7414369314671594232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_57
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 35
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 898360b11558b3010800000000000000
+      internalID: 1169675111625013400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_58
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 52
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33c19025ae1490d20800000000000000
+      internalID: 3245197481151634483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_59
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 70
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dbe2d0160f6d0ae0800000000000000
+      internalID: -1581485822294430761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_60
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 87
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad169f55e42163710800000000000000
+      internalID: 1672544439273873882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_61
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 87
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec774623e0bd037b0800000000000000
+      internalID: -5246452711865157682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_62
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 70
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: beabaebd16b3a4c50800000000000000
+      internalID: 6650193091253418731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_63
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 52
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f019a0ab96e53b10800000000000000
+      internalID: 1960726768879472888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_64
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cea6ad9e227553630800000000000000
+      internalID: 3906124059277683436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_65
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ab03fe0567f67e70800000000000000
+      internalID: 9112742909445344164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_66
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 17
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81ba234a0ea5aa1a0800000000000000
+      internalID: -6797520766688384232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_67
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 17
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10fbd96fa97495350800000000000000
+      internalID: 6005910308963335937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_68
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 35
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 175e3c143cf2160b0800000000000000
+      internalID: -5737251934624815759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_69
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 35
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db0ac1162e37f4ed0800000000000000
+      internalID: -2427594258000338755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_70
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 52
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 999b7c8fca6bff080800000000000000
+      internalID: -9151395063769089639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_71
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 52
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b5b31fa6ab2e51d0800000000000000
+      internalID: -3360200277069941328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_72
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 70
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8b6babf3b6e465d0800000000000000
+      internalID: -3070075385263985781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_73
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 70
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21e54c5ddcf792c50800000000000000
+      internalID: 6640979647565946386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_74
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 87
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61510d25e30e24160800000000000000
+      internalID: 7008410528423875862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_75
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 87
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b45e470d022b2d4b0800000000000000
+      internalID: -5417071547767265973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ring_tiles (1)_76
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 87
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1077e7d5c33685a40800000000000000
+      internalID: 5357140867674961665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

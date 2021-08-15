@@ -1,0 +1,29 @@
+Screen is 248 pixels long, 240 high
+
+Walls take up 55 pixels
+
+193 pixels of walking space or 77.82%
+
+Recording screen is 627 pixels long
+
+About 2.52x bigger
+
+5 frames, 18 pixels
+
+2.87%/0.083s
+
+34.44%/s
+
+100%/2.9s
+
+77.82%/2.25
+
+Frames to move from one side of the screen to the other
+332-197 = 135, which is 2.25 seconds exactly
+
+So in conclusion, he moves at around 85 pixels per second or 1.42352 pixels per frame
+
+
+
+Jump
+Start: 335	Peak: 419	End: 499

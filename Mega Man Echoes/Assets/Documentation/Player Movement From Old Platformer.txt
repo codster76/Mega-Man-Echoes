@@ -1,0 +1,309 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Player : MonoBehaviour {
+	//States
+		private enum movementState {
+			onGround = 0,
+			jump1 = 1, 
+			dash = 2,
+			fall = 3,
+			hurt = 4
+		};
+		public int state;
+	
+	//parameters
+		//vertical
+		private float ySpeed;
+		public float maxYSpeed = 100.0f;
+		public float fallSpeed = 1.0f;
+		public float jumpSpeed = 17.0f;
+		
+		//horizontal
+		private float xSpeed;
+		public float movementSpeed = 7.0f;
+		
+		//dash
+		public float dashSpeed = 7.0f;
+		public float maxDashTime = 0.1f;
+		private float dashTime = 0;
+		public float dashInterval = 0.5f;
+		public float maxDashIFrames;
+		private float currentDashIFrames;
+		
+		//health and damage
+		public int health = 3;
+		private float hurtTime;
+		public float maxHurtTime = 0.1f;
+		private float damageFlinchTime;
+		public float maxDamageFlinchTime = 1.0f;
+		public float damageFlinchSpeed = 0.2f;
+		public float iFrameMax;
+		private float iFrameCurrent;
+		private bool iFrameInvincible;
+		public Slider healthbar;
+		public static bool startInvincible;
+		
+		//general
+		private Vector2 velocity;
+	
+	//bools
+		public static bool touchingGround;
+		private bool facing; //true = left, false = right
+		private bool fall;
+		private bool jumpLock;
+		private bool canDash;
+		private bool dashInvincible;
+		private bool invincible;
+		private bool damaged;
+		public static bool canShoot;
+	
+	//Other Objects to Access
+		public ShotBehaviour shotPrefab;
+		public Rigidbody2D rb2d;
+		public SpriteRenderer sprite;
+		public Transform trans;
+		
+	//colours
+		private Color white = new Color(255,255,255);
+		private Color red = new Color(255,0,0);
+		private Color green = new Color(0,255,0);
+	
+	
+	
+	void Start () {
+		rb2d.freezeRotation = true;
+		jumpLock = false;
+		state = (int)movementState.hurt;
+		Debug.Log("Restart");
+	}
+	
+	void Update () {	
+		//Horizontal Movement
+		if(!damaged) {
+			xSpeed = Input.GetAxis("Horizontal");
+		}
+		
+		//state machine
+		switch(state) {
+			case 0: //onGround
+				if (Input.GetButton("Jump") && !jumpLock) { //GetButtonDown was not used because jump would not respond if pressed too early
+					ySpeed = -jumpSpeed;
+					state = (int)movementState.jump1;
+					jumpLock = true;
+				}
+				
+				if(!touchingGround) {
+					state = (int)movementState.fall;
+				}
+				
+				if(dashTime < dashInterval) {
+					canDash = true;
+				}
+				
+				break;
+				
+			case 1: //jump1
+				if (Input.GetButtonUp("Jump") && ySpeed < -4) {
+					ySpeed = -5;
+				}
+				
+				if(ySpeed >= 0) {
+					state = (int)movementState.fall;
+				}
+				
+				break;
+				
+			case 2: //dash
+				//Dashing is reset by touching the ground or waiting out dashInterval
+				canDash = false;
+			
+				if(dashTime < 0) {
+					state = (int)movementState.fall;
+				}
+				
+				if (facing) {
+					xSpeed = -dashSpeed;
+				} else {
+					xSpeed = dashSpeed;
+				}
+				
+				ySpeed = 0;
+				break;
+				
+			case 3: //fall
+				if(touchingGround) {
+					ySpeed = 0;
+					state = (int)movementState.onGround;
+				}
+				
+				break;
+			case 4: //hurt
+				touchingGround = false;
+				if (facing) {
+					xSpeed = damageFlinchSpeed;
+				} else {
+					xSpeed = -damageFlinchSpeed;
+				}
+				
+				if(damageFlinchTime < 0) {
+					state = (int)movementState.fall;
+				}
+				
+				if(touchingGround) {
+					ySpeed = 0;
+				}
+				break;
+		}
+		
+		resetStates();
+		
+		//Get the direction the player is facing
+		if(Input.GetAxis("Horizontal") > 0 && !damaged) {
+			facing = false;
+			sprite.flipX = false;
+		}
+		
+		if(Input.GetAxis("Horizontal") < 0 && !damaged) {
+			facing = true;
+			sprite.flipX = true;
+		}
+		
+		//Dash
+		if (Input.GetButtonDown("Dash") && canDash) {
+			dashTime = maxDashTime;
+			currentDashIFrames = maxDashIFrames;
+			state = (int)movementState.dash;
+		}
+		
+		//Dash timer
+		if(dashTime > -10) {
+			dashTime -= Time.deltaTime;
+		}
+		
+		//Falling
+		if (ySpeed < maxYSpeed && fall) {
+			ySpeed += fallSpeed;
+		}
+		
+		//Jump Locking
+		if (Input.GetButtonUp("Jump")) {
+			jumpLock = false;
+		}
+		
+		//Movement
+		velocity.y = -ySpeed;
+		velocity.x = xSpeed * movementSpeed;
+		
+		//Shooting
+		if(Input.GetButtonDown("Fire1") && GameObject.FindGameObjectsWithTag("Shot").Length < 3 && canShoot) { //only create a shot if there are less than 3 shots on screen
+			createShot();
+		}
+		
+		//Hurt Timer
+		hurtTime -= Time.deltaTime;
+		if(hurtTime < -maxHurtTime) {
+			sprite.color = white;
+		}
+		
+		//Flinch Timer
+		damageFlinchTime -= Time.deltaTime;
+		
+		//Die
+		if(health <= 0) {
+			Destroy(gameObject);
+			TextStuff.playerDie = true;
+		}
+		
+		//Invincibility Frames
+		if(currentDashIFrames < 0) {
+			dashInvincible = false;
+		} else {
+			sprite.color = green;
+			currentDashIFrames -= Time.deltaTime;
+			dashInvincible = true;
+		}
+		
+		if(iFrameCurrent > 0) {
+			iFrameInvincible = true;
+			iFrameCurrent -= Time.deltaTime;
+		} else {
+			iFrameInvincible = false;
+		}
+		
+		if(dashInvincible || iFrameInvincible || startInvincible) {
+			invincible = true;
+			sprite.color = green;
+		} else {
+			invincible = false;
+		}
+		
+		//if(currentDashIFrames < 0) {
+			//invincible = false;
+		//} else {
+			//currentDashIFrames -= Time.deltaTime;
+			//invincible = true;
+		//}
+		
+		//Health Bar
+		healthbar.value = (float)health;
+	}
+	
+	void FixedUpdate () {
+		//Move the rigidbody
+		rb2d.MovePosition(rb2d.position + velocity * Time.deltaTime);
+	}
+	
+	void createShot() {
+		//instantiate
+		ShotBehaviour shot = Instantiate(shotPrefab);
+		
+        //move to player
+        shot.transform.position = new Vector2(trans.position.x, trans.position.y);
+	}
+	
+	void OnTriggerStay2D(Collider2D c) {
+		if(c.gameObject.GetComponent<Damager>() != null && !invincible && Damager.canDamage) {
+			//Debug.Log("Damaged");
+			c.gameObject.GetComponent<Damager>().startTimer();
+			damageFlinchTime = maxDamageFlinchTime;
+			hurtTime = maxHurtTime;
+			iFrameCurrent = iFrameMax;
+			health -= c.gameObject.GetComponent<Damager>().damage;
+			sprite.color = red;
+			ySpeed = -10;
+			state = (int)movementState.hurt;
+			
+			TextStuff.playerDamaged = true;
+		}
+	}
+	
+	void resetStates() {
+		if(state != (int)movementState.hurt) {
+			damaged = false;
+		} else {
+			damaged = true;
+		}
+		
+		if(state == (int)movementState.dash || state == (int)movementState.onGround) {
+			fall = false;
+		} else {
+			fall = true;
+		}
+		
+		//if(state != (int)movementState.dash) {
+			//invincible = false;
+			//sprite.color = white;
+		//}
+	}
+	
+	public int getDirection() {
+		if(facing) {
+			return -1;
+		} else {
+			return 1;
+		}
+	}
+}
