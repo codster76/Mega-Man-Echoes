@@ -1,5 +1,11 @@
 IMPORTANT PARAMETERS:
 Horizontal Movement Speed is EXACTLY 5.125
+To Position the camera correctly for video:
+Pos: 0, 0.68, 0
+Aspect Ratio: 10:10
+Size: 7.981016
+Jump Speed: 15
+Gravity: 45
 
 Screen is 248 pixels long, 240 high
 
