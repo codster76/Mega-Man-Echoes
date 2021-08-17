@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
 				// Sliding
 				if(Input.GetButtonDown("Jump") && Input.GetAxis("Vertical") < 0)
 				{
+					Debug.Log("slide");
 					state = State.Slide;
 					dashTimer = 1; // needs to be 1 because I'm using lerp for dashing
 					dashStart = transform.position;
@@ -90,17 +91,16 @@ public class Player : MonoBehaviour
 				break;
 			case State.Jump:
 				Move(); // Allow horizontal movement while jumping
-				if(onGround)
-				{
-					Debug.Log("A");
-					StopFall();
-					state = State.Default;
-				}
 				
 				// Cancels jumps when the jump button is released
 				if(Input.GetButtonUp("Jump") && yVelocity > 0)
 				{
 					StopFall();
+				}
+				
+				if(onGround)
+				{
+					state = State.Default;
 				}
 				break;
 			case State.Slide:

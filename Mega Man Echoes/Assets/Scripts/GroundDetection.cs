@@ -13,7 +13,7 @@ public class GroundDetection : MonoBehaviour
 	
 	void OnCollisionEnter2D(Collision2D c)
 	{
-		//player.StopFall();
+		player.StopFall();
 	}
 	
 	void OnCollisionStay2D(Collision2D c)
