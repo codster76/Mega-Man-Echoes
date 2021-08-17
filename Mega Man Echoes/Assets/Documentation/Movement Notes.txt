@@ -6,6 +6,8 @@ Aspect Ratio: 10:10
 Size: 7.981016
 Jump Speed: 15
 Gravity: 45
+Slide Distance: 4.05
+Slide Time: 0.43
 
 Screen is 248 pixels long, 240 high
 
