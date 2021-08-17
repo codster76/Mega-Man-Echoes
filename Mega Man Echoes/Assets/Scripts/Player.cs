@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
 				if(Input.GetButtonDown("Jump") && Input.GetAxis("Vertical") < 0)
 				{
 					state = State.Slide;
-					dashTimer = 1;
+					dashTimer = 1; // needs to be 1 because I'm using lerp for dashing
 					dashStart = transform.position;
 					
 					if(facing == Facing.Left)
@@ -76,22 +76,53 @@ public class Player : MonoBehaviour
 						dashTarget = new Vector2(transform.position.x + dashDistance, transform.position.y);
 					}
 				}
-				else if(jumpBuffer && onGround) // Jumping
+				//else if(jumpBuffer && onGround) // Jumping
+				else if(Input.GetButtonDown("Jump") && onGround) // Jumping
 				{
-					//state = State.Jump;
 					yVelocity = jumpSpeed;
+					state = State.Jump;
+				}
+				else if(!onGround)
+				{
+					state = State.Jump;
 				}
 				
 				break;
 			case State.Jump:
 				Move(); // Allow horizontal movement while jumping
+				if(onGround)
+				{
+					Debug.Log("A");
+					StopFall();
+					state = State.Default;
+				}
 				
-				
-				
+				// Cancels jumps when the jump button is released
+				if(Input.GetButtonUp("Jump") && yVelocity > 0)
+				{
+					StopFall();
+				}
 				break;
 			case State.Slide:
 				if(dashTimer > 0)
 				{
+					// Moving in the opposite direction of a slide cancels it
+					if(facing == Facing.Left && Input.GetAxis("Horizontal") > 0)
+					{
+						state = State.Default;
+					}
+					else if (facing == Facing.Right && Input.GetAxis("Horizontal") < 0)
+					{
+						state = State.Default;
+					}
+					
+					// Jumping while sliding cancels it
+					if(Input.GetButtonDown("Jump") && onGround && Input.GetAxis("Vertical") >= 0)
+					{
+						yVelocity = jumpSpeed;
+						state = State.Jump;
+					}
+					
 					dashTimer -= Time.deltaTime/dashTime;
 					rb2d.MovePosition(Vector2.Lerp(dashStart, dashTarget, 1-dashTimer));
 				}
