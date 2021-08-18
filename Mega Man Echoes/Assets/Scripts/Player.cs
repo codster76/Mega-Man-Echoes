@@ -34,19 +34,6 @@ public class Player : MonoBehaviour
 	
 	public float gravity;
 	
-	private SpriteRenderer sprite;
-	private int animationFrameCount;
-	public Sprite run1;
-	public Sprite run2;
-	public Sprite run3;
-	public Sprite littleStep;
-	public Sprite runningShot1;
-	public Sprite runningShot2;
-	public Sprite runningShot3;
-	public Sprite jump;
-	public Sprite jumpingShot;
-	public Sprite slide;
-	
 	
 	enum State
 	{
@@ -173,7 +160,7 @@ public class Player : MonoBehaviour
 		yVelocity = 0;
 	}
 	
-	void jumpBuffering()
+	/*void jumpBuffering()
 	{
 		if(Input.GetButtonDown("Jump"))
 		{
@@ -188,7 +175,7 @@ public class Player : MonoBehaviour
 		{
 			jumpBuffer = false;
 		}
-	}
+	}*/
 	
 	void Move()
 	{

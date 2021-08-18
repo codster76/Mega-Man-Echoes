@@ -354,7 +354,6 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
-  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -416,7 +415,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 7.981016
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -446,18 +445,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ececf26bd2f88d04587e2d05f91c919f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &657277362
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,6 +540,7 @@ GameObject:
   - component: {fileID: 935092338}
   - component: {fileID: 935092335}
   - component: {fileID: 935092339}
+  - component: {fileID: 935092340}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -598,7 +586,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.0625, y: 1.3125}
+    oldSize: {x: 1.5, y: 1.5}
     newSize: {x: 0.04, y: 0.04}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -646,7 +634,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: dc24a27f639492042987b972486cba9a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 91d97d6f6bef413458867ac829405ae3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -691,6 +679,16 @@ MonoBehaviour:
   moveSpeed: 5.125
   jumpSpeed: 16
   gravity: 45
+  run1: {fileID: 21300000, guid: 77dab1ca75ef3ec41b2249541b6bd14b, type: 3}
+  run2: {fileID: 21300000, guid: 9113e3c0a7665cf47a2b11ca6df6381c, type: 3}
+  run3: {fileID: 21300000, guid: 8d141731fe3846445bbf7a0e3232570e, type: 3}
+  littleStep: {fileID: 0}
+  runningShot1: {fileID: 0}
+  runningShot2: {fileID: 0}
+  runningShot3: {fileID: 0}
+  jump: {fileID: 0}
+  jumpingShot: {fileID: 0}
+  slide: {fileID: 0}
 --- !u!95 &935092339
 Animator:
   serializedVersion: 3
@@ -710,6 +708,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &935092340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935092333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2de04bbb78b03fb44ac54e57dce1858d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 935092339}
 --- !u!1 &945472470
 GameObject:
   m_ObjectHideFlags: 0
