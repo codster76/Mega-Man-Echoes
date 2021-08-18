@@ -676,19 +676,11 @@ MonoBehaviour:
   dashDistance: 4.05
   dashTime: 0.43
   jumpBufferTime: 0.1
-  moveSpeed: 5.125
+  runSpeed: 5.125
+  stepSpeed: 2
   jumpSpeed: 16
   gravity: 45
-  run1: {fileID: 21300000, guid: 77dab1ca75ef3ec41b2249541b6bd14b, type: 3}
-  run2: {fileID: 21300000, guid: 9113e3c0a7665cf47a2b11ca6df6381c, type: 3}
-  run3: {fileID: 21300000, guid: 8d141731fe3846445bbf7a0e3232570e, type: 3}
-  littleStep: {fileID: 0}
-  runningShot1: {fileID: 0}
-  runningShot2: {fileID: 0}
-  runningShot3: {fileID: 0}
-  jump: {fileID: 0}
-  jumpingShot: {fileID: 0}
-  slide: {fileID: 0}
+  shootTime: 0
 --- !u!95 &935092339
 Animator:
   serializedVersion: 3
