@@ -228,7 +228,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172306123}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.158, z: 0}
+  m_LocalPosition: {x: 0, y: -0.189, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 935092337}
@@ -259,7 +259,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0045575798, y: -0.49416524}
+  m_Offset: {x: 0.02938795, y: -0.49416524}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -270,7 +270,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9361946, y: 0.011669517}
+  m_Size: {x: 1.1662047, y: 0.011669517}
   m_EdgeRadius: 0
 --- !u!1 &276899996
 GameObject:
@@ -379,7 +379,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304566217}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.158, z: 0}
+  m_LocalPosition: {x: 0, y: 0.255, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 935092337}
@@ -664,7 +664,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.031012714, y: 0.03137195}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -675,7 +675,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0625, y: 1.3125}
+  m_Size: {x: 1.1874431, y: 1.4374444}
   m_EdgeRadius: 0
 --- !u!212 &935092336
 SpriteRenderer:
@@ -764,8 +764,12 @@ MonoBehaviour:
   jumpSpeed: 16
   gravity: 45
   shootTime: 0.3
+  walkStartTime: 0.075
   walkAnimation: {fileID: 7400000, guid: 05c70b0a39d0f004eb52e7dad50e67e1, type: 2}
   teleport: {fileID: 7400000, guid: b53066d4b0db677499cb776ac65dde9b, type: 2}
+  idleAnimation: {fileID: 7400000, guid: 7cddd1b90206539458c07937d8c27c57, type: 2}
+  shot: {fileID: 3819957274517656937, guid: 4c45d0a33ed7e31449cba2c3cad8bd7c, type: 3}
+  projectileSpeed: 15.8
 --- !u!95 &935092339
 Animator:
   serializedVersion: 3
@@ -873,7 +877,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1596067153
 Transform:
   m_ObjectHideFlags: 0
@@ -6045,6 +6049,51 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1859031567
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1859031569}
+  - component: {fileID: 1859031568}
+  m_Layer: 0
+  m_Name: Object Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1859031568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859031567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9e20b4564373f48ae62a68a9253593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 0}
+  numberOfObjects: 0
+--- !u!4 &1859031569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859031567}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.980373, y: 0.06923002, z: -5.109218}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2126536438
 GameObject:
   m_ObjectHideFlags: 0
@@ -6061,7 +6110,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!328 &2126536439
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -6070,7 +6119,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2126536438}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 7c900376a905a5d4dbad3f7e97619f56, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 04f4d4ce0a2cf3e40a2d0d28e858800b, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 519420031}

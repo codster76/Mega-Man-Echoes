@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
 	public float shootTime = 0.3f;
 	private float shootTimer;
 	
-	private float walkStartTime = 0.075f;
+	public float walkStartTime = 0.075f;
 	private float walkStartTimer;
 	
 	private Animator animator;
@@ -48,9 +48,14 @@ public class Player : MonoBehaviour
 	
 	public AnimationClip walkAnimation;
 	public AnimationClip teleport;
+	public AnimationClip idleAnimation;
 	
 	private float walkTimer;
 	private float teleportTimer;
+	private float idleTimer;
+	
+	public float projectileSpeed;
+	public ObjectPool shotPool;
 	
 	
 	enum State
@@ -69,11 +74,13 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-		state = State.Teleport;
-		teleportTimer = teleport.length;
-		facing = Facing.Right;
 		animator = gameObject.GetComponent<Animator>();
 		sprite = gameObject.GetComponent<SpriteRenderer>();
+		
+		facing = Facing.Right;
+		
+		state = State.Teleport;
+		teleportTimer = teleport.length;
 		animator.Play("Teleport", -1, 0);
     }
 
@@ -97,6 +104,19 @@ public class Player : MonoBehaviour
 				break;
 			case State.Default:
 				Shoot();
+				
+				// Idle animation is a bit buggy (seems to be a lot shorter in the animator than the animation length indicates), so fix it later
+				idleTimer += Time.deltaTime;
+				idleTimer = idleTimer%idleAnimation.length;
+			
+				if(shooting)
+				{
+					animator.Play("MegaManIdleShoot", -1, 0);
+				}
+				else
+				{
+					animator.Play("MegaManIdle", -1, idleTimer);
+				}
 			
 				// Movement
 				if(Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Horizontal") < 0)
@@ -108,15 +128,6 @@ public class Player : MonoBehaviour
 				else // I know this looks pointless but if you walk for exactly 1 frame, your x velocity doesn't get reset
 				{
 					xVelocity = 0;
-				}
-				
-				if(shooting)
-				{
-					animator.Play("MegaManIdleShoot", -1, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-				}
-				else
-				{
-					animator.Play("MegaManIdle", -1, 0);
 				}
 				
 				// Sliding
@@ -170,6 +181,7 @@ public class Player : MonoBehaviour
 				
 				break;
 			case State.Slide:
+				moveSpeed = 0;
 				if(dashTimer > 0)
 				{
 					// Moving in the opposite direction of a slide cancels it
@@ -206,11 +218,10 @@ public class Player : MonoBehaviour
 				Move();
 				Shoot();
 				
-				if(shooting)
+				/*if(shooting)
 				{
-					Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 					animator.Play("MegaManIdleShoot", -1, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-				}
+				}*/
 				/*else
 				{
 					animator.Play("MegaManShortWalk", -1, 0);
@@ -260,6 +271,7 @@ public class Player : MonoBehaviour
 				Move();
 				Shoot();
 				
+				// To track animation time (normalised time doesn't do it properly when you're constantly switching states)
 				walkTimer += Time.deltaTime;
 				walkTimer = walkTimer%walkAnimation.length;
 				
@@ -330,6 +342,7 @@ public class Player : MonoBehaviour
 		
 		//jumpBuffering();
 		
+		// Note: I don't need to scale xVelocity by deltaTime because velocity is already scaled with time.
 		rb2d.velocity = new Vector2(xVelocity, yVelocity);
     }
 	
@@ -404,6 +417,28 @@ public class Player : MonoBehaviour
 		{
 			shooting = true;
 			shootTimer = shootTime;
+			
+			//instantiate
+			// I need access to the Projectile object type to run this bit
+			Projectile projectile = (Projectile)shotPool.deploy();
+			projectile.projectileSpeed = projectileSpeed;
+			
+			if(facing == Facing.Left)
+			{
+				projectile.transform.position = new Vector2(transform.position.x - 0.9f, transform.position.y);
+				projectile.direction = "Left";
+			}
+			else
+			{
+				projectile.transform.position = new Vector2(transform.position.x + 0.9f, transform.position.y);
+				projectile.direction = "Right";
+			}
+		}
+		
+		// This is just to reset the idle animation after shooting
+		if(Input.GetButtonUp("Shoot"))
+		{
+			idleTimer = 0;
 		}
 	}
 }
