@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
 	public float gravity = 45f;
 	
 	private bool shooting;
-	public float shootTime;
+	public float shootTime = 0.3f;
 	private float shootTimer;
 	
 	private float walkStartTime = 0.075f;
@@ -46,11 +46,16 @@ public class Player : MonoBehaviour
 	private Animator animator;
 	private SpriteRenderer sprite;
 	
+	public AnimationClip walkAnimation;
+	public AnimationClip teleport;
+	
 	private float walkTimer;
+	private float teleportTimer;
 	
 	
 	enum State
 	{
+		Teleport,
 		Default,
 		Jump,
 		Slide,
@@ -64,10 +69,12 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-		state = State.Default;
+		state = State.Teleport;
+		teleportTimer = teleport.length;
 		facing = Facing.Right;
 		animator = gameObject.GetComponent<Animator>();
 		sprite = gameObject.GetComponent<SpriteRenderer>();
+		animator.Play("Teleport", -1, 0);
     }
 
     // Update is called once per frame
@@ -75,6 +82,19 @@ public class Player : MonoBehaviour
     {
 		switch(state)
 		{
+			case State.Teleport:
+				sprite.enabled = false;
+				if(teleportTimer > 0)
+				{
+					teleportTimer -= Time.deltaTime;
+				}
+				else
+				{
+					sprite.enabled = true;
+					state = State.Default;
+					animator.Play("MegaManIdle", -1, 0);
+				}
+				break;
 			case State.Default:
 				Shoot();
 			
@@ -241,15 +261,15 @@ public class Player : MonoBehaviour
 				Shoot();
 				
 				walkTimer += Time.deltaTime;
-				walkTimer = walkTimer%0.467f; //0.467 is the animation length
+				walkTimer = walkTimer%walkAnimation.length;
 				
 				if(shooting)
 				{
-					animator.Play("MegaManShootWalk", -1, walkTimer/0.467f);
+					animator.Play("MegaManShootWalk", -1, walkTimer/walkAnimation.length);
 				}
 				else
 				{
-					animator.Play("MegaManWalk", -1, walkTimer/0.467f);
+					animator.Play("MegaManWalk", -1, walkTimer/walkAnimation.length);
 				}
 				
 				// Go back to default state if you stop moving
