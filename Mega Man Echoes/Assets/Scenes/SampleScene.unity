@@ -680,7 +680,7 @@ MonoBehaviour:
   stepSpeed: 2
   jumpSpeed: 16
   gravity: 45
-  shootTime: 0
+  shootTime: 0.5
 --- !u!95 &935092339
 Animator:
   serializedVersion: 3

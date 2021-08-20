@@ -17,7 +17,7 @@ public class TimeTest : MonoBehaviour
     {
 		// just to get my thoughts down somewhere, my idea is that when you press the shoot button, the script checks the normalized time, scales it based on 1 cycle (so if the animation is 3 seconds long and it's currently at 16 seconds, you'd calculate the normalised time as if you're 1 second in) and plays the shooting animation at that point.
 		
-        Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        //Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 		
 		if(Input.GetButtonDown("Test"))
 		{

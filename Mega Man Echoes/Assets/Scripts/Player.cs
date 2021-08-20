@@ -46,6 +46,8 @@ public class Player : MonoBehaviour
 	private Animator animator;
 	private SpriteRenderer sprite;
 	
+	private float walkTimer;
+	
 	
 	enum State
 	{
@@ -88,6 +90,15 @@ public class Player : MonoBehaviour
 					xVelocity = 0;
 				}
 				
+				if(shooting)
+				{
+					animator.Play("MegaManIdleShoot", -1, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+				}
+				else
+				{
+					animator.Play("MegaManIdle", -1, 0);
+				}
+				
 				// Sliding
 				if(Input.GetButtonDown("Jump") && Input.GetAxis("Vertical") < 0)
 				{
@@ -109,15 +120,6 @@ public class Player : MonoBehaviour
 					animator.Play("MegaManJump", -1, 0);
 				}
 				
-				if(shooting)
-				{
-					animator.Play("MegaManIdleShoot", -1, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-				}
-				/*else
-				{
-					animator.Play("MegaManIdle", -1, 0);
-				}*/
-				
 				break;
 			case State.Jump:
 				moveSpeed = runSpeed;
@@ -130,20 +132,21 @@ public class Player : MonoBehaviour
 					StopFall();
 				}
 				
-				if(onGround)
-				{
-					state = State.Default;
-					animator.Play("MegaManIdle", -1, 0);
-				}
-				
 				if(shooting)
 				{
 					animator.Play("MegaManJumpShoot", -1, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 				}
-				/*else
+				else
 				{
 					animator.Play("MegaManJump", -1, 0);
-				}*/
+				}
+				
+				if(onGround)
+				{
+					state = State.Walk;
+					walkTimer = 0;
+					animator.Play("MegaManWalk", -1, 0);
+				}
 				
 				break;
 			case State.Slide:
@@ -183,6 +186,16 @@ public class Player : MonoBehaviour
 				Move();
 				Shoot();
 				
+				if(shooting)
+				{
+					Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+					animator.Play("MegaManIdleShoot", -1, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+				}
+				/*else
+				{
+					animator.Play("MegaManShortWalk", -1, 0);
+				}*/
+				
 				// Go back to default state if you stop moving
 				if(Input.GetAxis("Horizontal") == 0)
 				{
@@ -217,23 +230,27 @@ public class Player : MonoBehaviour
 				else
 				{
 					state = State.Walk;
+					walkTimer = 0;
 					animator.Play("MegaManWalk", -1, 0);
 				}
-				
-				if(shooting)
-				{
-					animator.Play("MegaManIdleShoot", -1, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-				}
-				/*else
-				{
-					animator.Play("MegaManShortWalk", -1, 0);
-				}*/
 				
 				break;
 			case State.Walk:
 				moveSpeed = runSpeed;
 				Move();
 				Shoot();
+				
+				walkTimer += Time.deltaTime;
+				walkTimer = walkTimer%0.467f; //0.467 is the animation length
+				
+				if(shooting)
+				{
+					animator.Play("MegaManShootWalk", -1, walkTimer/0.467f);
+				}
+				else
+				{
+					animator.Play("MegaManWalk", -1, walkTimer/0.467f);
+				}
 				
 				// Go back to default state if you stop moving
 				if(Input.GetAxis("Horizontal") == 0)
@@ -261,15 +278,6 @@ public class Player : MonoBehaviour
 					state = State.Jump;
 					animator.Play("MegaManJump", -1, 0);
 				}
-				
-				if(shooting)
-				{
-					animator.Play("MegaManShootWalk", -1, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-				}
-				/*else
-				{
-					animator.Play("MegaManWalk", -1, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-				}*/
 				
 				break;
 		}
