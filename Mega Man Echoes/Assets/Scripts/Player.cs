@@ -55,7 +55,8 @@ public class Player : MonoBehaviour
 	private float idleTimer;
 	
 	public float projectileSpeed;
-	public ObjectPool shotPool;
+	public ObjectPoolClass shotPool;
+	//public Projectile projectile;
 	
 	
 	enum State
@@ -413,14 +414,14 @@ public class Player : MonoBehaviour
 	
 	private void Shoot()
 	{
-		if(Input.GetButtonDown("Shoot"))
+		if(Input.GetButtonDown("Shoot") && shotPool.poolCount() > 0)
 		{
 			shooting = true;
 			shootTimer = shootTime;
 			
 			//instantiate
 			// I need access to the Projectile object type to run this bit
-			Projectile projectile = (Projectile)shotPool.deploy();
+			MegaMan.Projectile projectile = shotPool.deploy().GetComponent<MegaMan.Projectile>();
 			projectile.projectileSpeed = projectileSpeed;
 			
 			if(facing == Facing.Left)
