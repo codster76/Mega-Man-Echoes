@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ReplacementMap:
-        m_Texture: {fileID: 2800000, guid: e8ecdadc1f14591469b2754a41eb6eec, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2f0f464f0766f73429db5fea97d73701, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:

@@ -9,13 +9,15 @@ public class Projectile : MonoBehaviour
 	public float projectileSpeed;
 	public string direction;
 	private Rigidbody2D rb2d;
-	public ObjectPoolClass shotPool;
+	public ObjectPoolClass shotPool; // every projectile needs an object pool
+	public int damage;
+	private SpriteRenderer sprite;
 	
-	// Start is called before the first frame update
 	void Start()
 	{
 		shotPool = transform.parent.GetComponent<ObjectPoolClass>();
 		rb2d = gameObject.GetComponent<Rigidbody2D>();
+		sprite = gameObject.GetComponent<SpriteRenderer>();
 	}
 
 	// Update is called once per frame
@@ -23,12 +25,14 @@ public class Projectile : MonoBehaviour
 	{
 		if(direction == "Left")
 		{
-			rb2d.velocity = new Vector2(-projectileSpeed, 0);
+			sprite.flipX = true;
 		}
 		else
 		{
-			rb2d.velocity = new Vector2(projectileSpeed, 0);
+			sprite.flipX = false;
 		}
+		
+		rb2d.velocity = new Vector2(projectileSpeed, 0);
 	}
 	
 	void OnCollisionEnter2D(Collision2D c)

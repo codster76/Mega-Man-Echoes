@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MegaManCharge4
+  m_Name: MegaManCharge5
   m_Shader: {fileID: 4800000, guid: bddc5883c27eed246a8b6e92d2cb9403, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ReplacementMap:
-        m_Texture: {fileID: 2800000, guid: e8ecdadc1f14591469b2754a41eb6eec, type: 3}
+        m_Texture: {fileID: 2800000, guid: 713f17129064c4f4a892a375cb093bfd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:

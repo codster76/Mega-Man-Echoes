@@ -503,6 +503,52 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1662047, y: 0.011669517}
   m_EdgeRadius: 0
+--- !u!1 &254357402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 254357404}
+  - component: {fileID: 254357403}
+  m_Layer: 0
+  m_Name: Charge Shot Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &254357403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254357402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 144b842c559867246af54f3e92ae9545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 2951357599658278237, guid: f576bca52a34e484dafc160108c606a8,
+    type: 3}
+  numberOfObjects: 1
+--- !u!4 &254357404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254357402}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.03, y: 3.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 935092337}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &304566217
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,6 +857,8 @@ Transform:
   - {fileID: 172306124}
   - {fileID: 304566218}
   - {fileID: 96219953}
+  - {fileID: 1859031569}
+  - {fileID: 254357404}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -840,6 +888,12 @@ MonoBehaviour:
   idleAnimation: {fileID: 7400000, guid: 7cddd1b90206539458c07937d8c27c57, type: 2}
   projectileSpeed: 15.8
   shotPool: {fileID: 1859031568}
+  chargeShot2Speed: 15.8
+  chargeShot2Pool: {fileID: 254357403}
+  charge1: 34
+  charge2: 50
+  charge3: 66
+  charge4: 82
 --- !u!95 &935092339
 Animator:
   serializedVersion: 3
@@ -993,7 +1047,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1596067152
 GameObject:
@@ -6195,7 +6249,7 @@ GameObject:
   - component: {fileID: 1859031569}
   - component: {fileID: 1859031568}
   m_Layer: 0
-  m_Name: Object Pool
+  m_Name: Normal Shot Pool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6223,10 +6277,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1859031567}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.03, y: 3.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 935092337}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

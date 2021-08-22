@@ -8,8 +8,7 @@ public class ObjectPoolClass : MonoBehaviour
 	public int numberOfObjects;
 	private Stack pool;
 	
-	// Start is called before the first frame update
-	void Start()
+	void Awake()
 	{
 		pool = new Stack();
 		for(int i = 0;i<numberOfObjects;i++)

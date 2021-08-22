@@ -56,24 +56,16 @@ public class Player : MonoBehaviour
 	
 	public float projectileSpeed;
 	public ObjectPoolClass shotPool;
-	//public Projectile projectile;
 	
-	private int frames;
+	public float chargeShot2Speed;
+	public ObjectPoolClass chargeShot2Pool;
+	
 	private float chargeTimer;
-	private int chargeColour;
-	private int chargeLevel;
 	
-	// timers based on frames
-	public int charge1 = 34;
-	public int charge2 = 50;
-	public int charge3 = 66;
-	public int charge4 = 82;
-	
-	public Material chargeMaterial1;
-	public Material chargeMaterial2;
-	public Material chargeMaterial3;
-	public Material chargeMaterial4;
-	public Material chargeMaterial5;
+	public float charge1 = 0.567f;
+	public float charge2 = 0.833f;
+	public float charge3 = 1.1f;
+	public float charge4 = 1.367f;
 	
 	
 	enum State
@@ -87,6 +79,17 @@ public class Player : MonoBehaviour
 	};
 	
 	private State state;
+	
+	enum WeaponState
+	{
+		Default,
+		Charge1,
+		Charge2,
+		Charge3,
+		Charge4
+	}
+	
+	private WeaponState weaponState;
 	
     // Start is called before the first frame update
     void Start()
@@ -332,6 +335,71 @@ public class Player : MonoBehaviour
 				break;
 		}
 		
+		switch(weaponState)
+		{
+			case WeaponState.Default:
+				if(chargeTimer > charge1)
+				{
+					animator.Play("MegaManCharge1", 1, 0);
+					weaponState = WeaponState.Charge1;
+				}
+				break;
+			case WeaponState.Charge1:
+				if(chargeTimer > charge2)
+				{
+					animator.Play("MegaManCharge2", 1, 0);
+					weaponState = WeaponState.Charge2;
+				}
+				
+				if(!Input.GetButton("Shoot"))
+				{
+					animator.Play("MegaManNoCharge", 1, 0);
+					chargeTimer = 0;
+					weaponState = WeaponState.Default;
+				}
+				break;
+			case WeaponState.Charge2:
+				if(chargeTimer > charge3)
+				{
+					animator.Play("MegaManCharge3", 1, 0);
+					weaponState = WeaponState.Charge3;
+				}
+				
+				if(!Input.GetButton("Shoot"))
+				{
+					animator.Play("MegaManNoCharge", 1, 0);
+					chargeTimer = 0;
+					weaponState = WeaponState.Default;
+				}
+				break;
+			case WeaponState.Charge3:
+				if(chargeTimer > charge4)
+				{
+					animator.Play("MegaManCharge4", 1, 0);
+					weaponState = WeaponState.Charge4;
+				}
+				
+				if(!Input.GetButton("Shoot"))
+				{
+					animator.Play("MegaManNoCharge", 1, 0);
+					chargeTimer = 0;
+					weaponState = WeaponState.Default;
+				}
+				break;
+			case WeaponState.Charge4:
+				if(!Input.GetButton("Shoot"))
+				{
+					animator.Play("MegaManNoCharge", 1, 0);
+					chargeTimer = 0;
+					weaponState = WeaponState.Default;
+					if(chargeShot2Pool.poolCount() > 0)
+					{
+						CreateChargeShot2(chargeShot2Speed);
+					}
+				}
+				break;
+		}
+		
 		if(!onGround)
 		{
 			EndDash();
@@ -434,23 +502,23 @@ public class Player : MonoBehaviour
 	
 	private void Shoot()
 	{
-		if(Input.GetButtonDown("Shoot") && shotPool.poolCount() > 0)
+		if(Input.GetButtonDown("Shoot") && shotPool.poolCount() > 0 && chargeShot2Pool.poolCount() > 0)
 		{
 			shooting = true;
 			shootTimer = shootTime;
 			
 			//instantiate
-			// I need access to the Projectile object type to run this bit
 			MegaMan.Projectile projectile = shotPool.deploy().GetComponent<MegaMan.Projectile>();
-			projectile.projectileSpeed = projectileSpeed;
 			
 			if(facing == Facing.Left)
 			{
+				projectile.projectileSpeed = -projectileSpeed;
 				projectile.transform.position = new Vector2(transform.position.x - 0.9f, transform.position.y);
 				projectile.direction = "Left";
 			}
 			else
 			{
+				projectile.projectileSpeed = projectileSpeed;
 				projectile.transform.position = new Vector2(transform.position.x + 0.9f, transform.position.y);
 				projectile.direction = "Right";
 			}
@@ -468,73 +536,28 @@ public class Player : MonoBehaviour
 		if(Input.GetButton("Shoot"))
 		{
 			chargeTimer += Time.deltaTime * 60;
-			frames = (int)chargeTimer;
+		}
+	}
+	
+	private void CreateChargeShot2(float speed)
+	{
+		shooting = true;
+		shootTimer = shootTime;
+		
+		//instantiate
+		MegaMan.Projectile projectile = chargeShot2Pool.deploy().GetComponent<MegaMan.Projectile>();
+		
+		if(facing == Facing.Left)
+		{
+			projectile.projectileSpeed = -speed;
+			projectile.transform.position = new Vector2(transform.position.x - 0.9f, transform.position.y);
+			projectile.direction = "Left";
 		}
 		else
 		{
-			chargeTimer = 0;
-			frames = 0;
-			chargeLevel = 0;
-		}
-		
-		switch(chargeLevel)
-		{
-			case 0:
-				if(frames > charge1)
-				{
-					
-				}
-				break;
-			case 1:
-				
-				break;
-			case 2:
-				
-				break;
-			case 3:
-				
-				break;
-			case 4:
-				
-				break;
-		}
-		
-		if(frames > 0 && frames < charge1)
-		{
-			
-		}
-		else if (frames > charge1 && frames < charge2)
-		{
-			if(frames%3 == 0)
-			{
-				chargeColour++;
-			}
-			
-			if(chargeColour >= 7)
-			{
-				chargeColour = 0;
-			}
-		}
-		else if (frames > charge2 && frames < charge3)
-		{
-			if(frames%3 == 0)
-			{
-				
-			}
-		}
-		else if (frames > charge3 && frames < charge4)
-		{
-			if(frames%3 == 0)
-			{
-				
-			}
-		}
-		else if (frames > charge4)
-		{
-			if(frames%3 == 0)
-			{
-				
-			}
+			projectile.projectileSpeed = speed;
+			projectile.transform.position = new Vector2(transform.position.x + 0.9f, transform.position.y);
+			projectile.direction = "Right";
 		}
 	}
 }
