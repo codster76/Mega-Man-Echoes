@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GroundDetection : MonoBehaviour
 {
-	Player player;
+	private Player player;
 	
 	void Start()
 	{
@@ -13,7 +13,7 @@ public class GroundDetection : MonoBehaviour
 	
 	void OnCollisionEnter2D(Collision2D c)
 	{
-		player.StopFall();
+		player.ResetYVelocity();
 	}
 	
 	void OnCollisionStay2D(Collision2D c)

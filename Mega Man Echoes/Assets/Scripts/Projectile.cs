@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
 	public string direction;
 	private Rigidbody2D rb2d;
 	public ObjectPoolClass shotPool; // every projectile needs an object pool
-	public int damage;
+	public int damage = 1;
 	private SpriteRenderer sprite;
 	
 	void Start()
@@ -37,7 +37,11 @@ public class Projectile : MonoBehaviour
 	
 	void OnCollisionEnter2D(Collision2D c)
 	{
-		returnToPool();
+		damage -= 1;
+		if(damage <= 0)
+		{
+			returnToPool();
+		}
 	}
 	
 	private void returnToPool()

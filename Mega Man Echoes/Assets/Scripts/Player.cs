@@ -54,8 +54,14 @@ public class Player : MonoBehaviour
 	private float teleportTimer;
 	private float idleTimer;
 	
+	public float hurtTime;
+	private float hurtTimer;
+	
 	public float projectileSpeed;
 	public ObjectPoolClass shotPool;
+	
+	public float chargeShot1Speed;
+	public ObjectPoolClass chargeShot1Pool;
 	
 	public float chargeShot2Speed;
 	public ObjectPoolClass chargeShot2Pool;
@@ -75,7 +81,9 @@ public class Player : MonoBehaviour
 		Jump,
 		Slide,
 		WalkStart,
-		Walk
+		Walk,
+		Hurt,
+		Climb
 	};
 	
 	private State state;
@@ -90,6 +98,15 @@ public class Player : MonoBehaviour
 	}
 	
 	private WeaponState weaponState;
+	
+	// Things I need to do
+	/*
+	- You can released charged shots while sliding
+	- Climbing
+	- Hurt
+	*/
+	
+	
 	
     // Start is called before the first frame update
     void Start()
@@ -179,9 +196,10 @@ public class Player : MonoBehaviour
 				Shoot();
 				
 				// Cancels jumps when the jump button is released
-				if(!Input.GetButton("Jump") && yVelocity > 0)
+				// Unfortunately, it has to be GetButton because GetButtonUp sometimes gets eaten
+				if(!Input.GetButton("Jump"))
 				{
-					StopFall();
+					StopJump();
 				}
 				
 				if(shooting)
@@ -238,15 +256,6 @@ public class Player : MonoBehaviour
 				moveSpeed = stepSpeed;
 				Move();
 				Shoot();
-				
-				/*if(shooting)
-				{
-					animator.Play("MegaManIdleShoot", -1, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-				}*/
-				/*else
-				{
-					animator.Play("MegaManShortWalk", -1, 0);
-				}*/
 				
 				// Go back to default state if you stop moving
 				if(Input.GetAxis("Horizontal") == 0)
@@ -333,6 +342,19 @@ public class Player : MonoBehaviour
 				}
 				
 				break;
+			case State.Hurt:
+				if(hurtTimer > 0)
+				{
+					hurtTimer -= Time.deltaTime;
+				}
+				else
+				{
+					state = State.Default;
+					animator.Play("MegaManIdle", 0, 0);
+				}
+				break;
+			case State.Climb:
+				break;
 		}
 		
 		switch(weaponState)
@@ -356,6 +378,10 @@ public class Player : MonoBehaviour
 					animator.Play("MegaManNoCharge", 1, 0);
 					chargeTimer = 0;
 					weaponState = WeaponState.Default;
+					if(chargeShot1Pool.poolCount() > 0)
+					{
+						CreateShot(chargeShot1Pool, chargeShot1Speed);
+					}
 				}
 				break;
 			case WeaponState.Charge2:
@@ -370,6 +396,10 @@ public class Player : MonoBehaviour
 					animator.Play("MegaManNoCharge", 1, 0);
 					chargeTimer = 0;
 					weaponState = WeaponState.Default;
+					if(chargeShot1Pool.poolCount() > 0)
+					{
+						CreateShot(chargeShot1Pool, chargeShot1Speed);
+					}
 				}
 				break;
 			case WeaponState.Charge3:
@@ -384,6 +414,10 @@ public class Player : MonoBehaviour
 					animator.Play("MegaManNoCharge", 1, 0);
 					chargeTimer = 0;
 					weaponState = WeaponState.Default;
+					if(chargeShot1Pool.poolCount() > 0)
+					{
+						CreateShot(chargeShot1Pool, chargeShot1Speed);
+					}
 				}
 				break;
 			case WeaponState.Charge4:
@@ -394,7 +428,7 @@ public class Player : MonoBehaviour
 					weaponState = WeaponState.Default;
 					if(chargeShot2Pool.poolCount() > 0)
 					{
-						CreateChargeShot2(chargeShot2Speed);
+						CreateShot(chargeShot2Pool, chargeShot2Speed);
 					}
 				}
 				break;
@@ -402,8 +436,8 @@ public class Player : MonoBehaviour
 		
 		if(!onGround)
 		{
-			EndDash();
-			yVelocity -= gravity * Time.deltaTime;
+			EndDash(); // Cancels slides if you slide off an edge
+			yVelocity -= gravity * Time.deltaTime; // Gravity
 		}
 		
 		// Control the sprite orientation
@@ -435,6 +469,16 @@ public class Player : MonoBehaviour
 		rb2d.velocity = new Vector2(xVelocity, yVelocity);
     }
 	
+	void OnTriggerEnter2D(Collider2D c)
+	{
+		if(c.gameObject.tag == "Enemy")
+		{
+			state = State.Hurt;
+			chargeTimer = 0;
+			hurtTimer = hurtTime;
+		}
+	}
+	
 	public void EndDash()
 	{
 		dashTimer = 0;
@@ -445,27 +489,18 @@ public class Player : MonoBehaviour
 		onGround = ground;
 	}
 	
-	public void StopFall()
+	public void StopJump()
+	{
+		if(yVelocity > 0)
+		{
+			yVelocity = 0;
+		}
+	}
+	
+	public void ResetYVelocity()
 	{
 		yVelocity = 0;
 	}
-	
-	/*void jumpBuffering()
-	{
-		if(Input.GetButtonDown("Jump"))
-		{
-			jumpBufferTimer = jumpBufferTime;
-		}
-		if(jumpBufferTimer > 0)
-		{
-			jumpBuffer = true;
-			jumpBufferTimer -= Time.deltaTime;
-		}
-		else
-		{
-			jumpBuffer = false;
-		}
-	}*/
 	
 	private void Move()
 	{
@@ -502,26 +537,9 @@ public class Player : MonoBehaviour
 	
 	private void Shoot()
 	{
-		if(Input.GetButtonDown("Shoot") && shotPool.poolCount() > 0 && chargeShot2Pool.poolCount() > 0)
+		if(Input.GetButtonDown("Shoot") && shotPool.poolCount() > 0 && chargeShot2Pool.poolCount() > 0 && chargeShot1Pool.poolCount() > 0)
 		{
-			shooting = true;
-			shootTimer = shootTime;
-			
-			//instantiate
-			MegaMan.Projectile projectile = shotPool.deploy().GetComponent<MegaMan.Projectile>();
-			
-			if(facing == Facing.Left)
-			{
-				projectile.projectileSpeed = -projectileSpeed;
-				projectile.transform.position = new Vector2(transform.position.x - 0.9f, transform.position.y);
-				projectile.direction = "Left";
-			}
-			else
-			{
-				projectile.projectileSpeed = projectileSpeed;
-				projectile.transform.position = new Vector2(transform.position.x + 0.9f, transform.position.y);
-				projectile.direction = "Right";
-			}
+			CreateShot(shotPool, projectileSpeed);
 		}
 		
 		// This is just to reset the idle animation after shooting
@@ -539,14 +557,16 @@ public class Player : MonoBehaviour
 		}
 	}
 	
-	private void CreateChargeShot2(float speed)
+	private void CreateShot(ObjectPoolClass objectPool, float speed)
 	{
+		// Start Mega Man's shooting animation
 		shooting = true;
 		shootTimer = shootTime;
 		
 		//instantiate
-		MegaMan.Projectile projectile = chargeShot2Pool.deploy().GetComponent<MegaMan.Projectile>();
+		MegaMan.Projectile projectile = objectPool.deploy().GetComponent<MegaMan.Projectile>();
 		
+		// Set initial variables
 		if(facing == Facing.Left)
 		{
 			projectile.projectileSpeed = -speed;
