@@ -4,11 +4,13 @@
     {
         _MainTex ("Texture", 2D) = "white" {}
 		_ReplacementMap ("Texture", 2D) = "white" {}
+		_Flip ("Flip", Vector) = (1,1,1,1)
     }
     SubShader
     {
         Tags { "RenderType"="Opaque" }
 		Blend One OneMinusSrcAlpha
+		Cull Off
 
         Pass
         {
@@ -31,7 +33,7 @@
             };
 
             sampler2D _MainTex;
-			sampler2D _ReplacementMap;
+			sampler2D _ReplacementMap; // A texture that's 255x1 in size. Colour pixels at coordinates based on the r values on the original texture
             float4 _MainTex_ST;
 
             v2f vert (appdata v)
@@ -44,22 +46,19 @@
 
             float4 frag (v2f i) : SV_Target
             {
-				// check the red value of the original texture
 				// code idea from https://forum.unity.com/threads/color-replacement-shader.83582/
-				//float2 test = i.uv;
-				//test.x = test.x;
-				//test.y = test.y + 0;
-				//float coord = tex2D(_MainTex, test).r;
+			
+				// get the red value of the original texture
 				float coord = tex2D(_MainTex, i.uv).r;
 			
-                // sample the texture
+                // get the current pixel colour from the main texture
                 float4 col = tex2D(_MainTex, i.uv);
+				
+				// using the red value as a coordinate, get the pixel at that x value from the second image (the -0.001955 is important for centreing the pixel)
 				col.rgb = tex2D(_ReplacementMap, float2(coord - 0.001955, 0)).rgb;
+				
                 return col * col.a;
             }
-			
-			// Note: I'll take in a 256 wide texture with the potential colour replacements and 
-			
             ENDCG
         }
     }
