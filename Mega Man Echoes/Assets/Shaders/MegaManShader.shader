@@ -54,8 +54,8 @@
                 // get the current pixel colour from the main texture
                 float4 col = tex2D(_MainTex, i.uv);
 				
-				// using the red value as a coordinate, get the pixel at that x value from the second image (the -0.001955 is important for centreing the pixel)
-				col.rgb = tex2D(_ReplacementMap, float2(coord - 0.001955, 0)).rgb;
+				// using the red value as a coordinate, get the pixel at that x value from the second image
+				col.rgb = tex2D(_ReplacementMap, float2(coord, 0)).rgb;
 				
                 return col * col.a;
             }
