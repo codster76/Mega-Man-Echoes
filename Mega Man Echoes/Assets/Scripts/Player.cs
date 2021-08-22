@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
 	public float runSpeed = 5.125f;
 	public float stepSpeed;
 	public float jumpSpeed = 16f;
+	public float hurtSpeed;
 	
 	public float gravity = 45f;
 	
@@ -49,12 +50,12 @@ public class Player : MonoBehaviour
 	public AnimationClip walkAnimation;
 	public AnimationClip teleport;
 	public AnimationClip idleAnimation;
+	public AnimationClip hurtAnimation;
 	
 	private float walkTimer;
 	private float teleportTimer;
 	private float idleTimer;
 	
-	public float hurtTime;
 	private float hurtTimer;
 	
 	public float projectileSpeed;
@@ -104,6 +105,11 @@ public class Player : MonoBehaviour
 	- You can released charged shots while sliding
 	- Climbing
 	- Hurt
+	- Slide particles
+	- Hurt particles
+	- Terminal velocity
+	- Charge shot speed (both kinds)
+	- Hurt speed
 	*/
 	
 	
@@ -342,7 +348,15 @@ public class Player : MonoBehaviour
 				}
 				
 				break;
-			case State.Hurt:
+			case State.Hurt: // For some reason, knockback isn't working
+				if(facing == Facing.Left)
+				{
+					moveSpeed = hurtSpeed;
+				}
+				else
+				{
+					moveSpeed = -hurtSpeed;
+				}
 				if(hurtTimer > 0)
 				{
 					hurtTimer -= Time.deltaTime;
@@ -473,9 +487,13 @@ public class Player : MonoBehaviour
 	{
 		if(c.gameObject.tag == "Enemy")
 		{
+			animator.Play("MegaManHurt", 0, 0);
+			weaponState = WeaponState.Default;
 			state = State.Hurt;
 			chargeTimer = 0;
-			hurtTimer = hurtTime;
+			xVelocity = 0;
+			hurtTimer = hurtAnimation.length;
+			StopJump();
 		}
 	}
 	

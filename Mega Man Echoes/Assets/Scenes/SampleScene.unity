@@ -6130,6 +6130,31 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 3066423124200191719, guid: 23e60384b5d916d4880614d8fbb0b7e5,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3066423124200191719, guid: 23e60384b5d916d4880614d8fbb0b7e5,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3066423124200191736, guid: 23e60384b5d916d4880614d8fbb0b7e5,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3066423124200191736, guid: 23e60384b5d916d4880614d8fbb0b7e5,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3066423124200191736, guid: 23e60384b5d916d4880614d8fbb0b7e5,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3066423124200191737, guid: 23e60384b5d916d4880614d8fbb0b7e5,
         type: 3}
       propertyPath: m_RootOrder
@@ -6190,6 +6215,16 @@ PrefabInstance:
       propertyPath: hurtTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3066423124200191738, guid: 23e60384b5d916d4880614d8fbb0b7e5,
+        type: 3}
+      propertyPath: hurtSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3066423124200191738, guid: 23e60384b5d916d4880614d8fbb0b7e5,
+        type: 3}
+      propertyPath: hurtAnimation
+      value: 
+      objectReference: {fileID: 7400000, guid: 9a8aa5fd63e81b44faea9a15971da818, type: 2}
     - target: {fileID: 3066423124880524423, guid: 23e60384b5d916d4880614d8fbb0b7e5,
         type: 3}
       propertyPath: m_Layer
