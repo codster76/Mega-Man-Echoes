@@ -58,6 +58,23 @@ public class Player : MonoBehaviour
 	public ObjectPoolClass shotPool;
 	//public Projectile projectile;
 	
+	private int frames;
+	private float chargeTimer;
+	private int chargeColour;
+	private int chargeLevel;
+	
+	// timers based on frames
+	public int charge1 = 34;
+	public int charge2 = 50;
+	public int charge3 = 66;
+	public int charge4 = 82;
+	
+	public Material chargeMaterial1;
+	public Material chargeMaterial2;
+	public Material chargeMaterial3;
+	public Material chargeMaterial4;
+	public Material chargeMaterial5;
+	
 	
 	enum State
 	{
@@ -100,7 +117,7 @@ public class Player : MonoBehaviour
 				{
 					sprite.enabled = true;
 					state = State.Default;
-					animator.Play("MegaManIdle", -1, 0);
+					animator.Play("MegaManIdle", 0, 0);
 				}
 				break;
 			case State.Default:
@@ -112,11 +129,11 @@ public class Player : MonoBehaviour
 			
 				if(shooting)
 				{
-					animator.Play("MegaManIdleShoot", -1, 0);
+					animator.Play("MegaManIdleShoot", 0, 0);
 				}
 				else
 				{
-					animator.Play("MegaManIdle", -1, idleTimer);
+					animator.Play("MegaManIdle", 0, idleTimer);
 				}
 			
 				// Movement
@@ -124,7 +141,7 @@ public class Player : MonoBehaviour
 				{
 					state = State.WalkStart;
 					walkStartTimer = walkStartTime;
-					animator.Play("MegaManShortWalk", -1, 0);
+					animator.Play("MegaManShortWalk", 0, 0);
 				}
 				else // I know this looks pointless but if you walk for exactly 1 frame, your x velocity doesn't get reset
 				{
@@ -135,7 +152,7 @@ public class Player : MonoBehaviour
 				if(Input.GetButtonDown("Jump") && Input.GetAxis("Vertical") < 0)
 				{
 					state = State.Slide;
-					animator.Play("MegaManSlide", -1, 0);
+					animator.Play("MegaManSlide", 0, 0);
 					StartSlide();
 				}
 				//else if(jumpBuffer && onGround) // Jumping
@@ -143,13 +160,13 @@ public class Player : MonoBehaviour
 				{
 					yVelocity = jumpSpeed;
 					state = State.Jump;
-					animator.Play("MegaManJump", -1, 0);
+					animator.Play("MegaManJump", 0, 0);
 				}
 				//else if(Input.GetButtonUp("Jump") && yVelocity > 0)
 				else if(!onGround)
 				{
 					state = State.Jump;
-					animator.Play("MegaManJump", -1, 0);
+					animator.Play("MegaManJump", 0, 0);
 				}
 				
 				break;
@@ -166,18 +183,18 @@ public class Player : MonoBehaviour
 				
 				if(shooting)
 				{
-					animator.Play("MegaManJumpShoot", -1, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+					animator.Play("MegaManJumpShoot", 0, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 				}
 				else
 				{
-					animator.Play("MegaManJump", -1, 0);
+					animator.Play("MegaManJump", 0, 0);
 				}
 				
 				if(onGround)
 				{
 					state = State.Walk;
 					walkTimer = 0;
-					animator.Play("MegaManWalk", -1, 0);
+					animator.Play("MegaManWalk", 0, 0);
 				}
 				
 				break;
@@ -189,12 +206,12 @@ public class Player : MonoBehaviour
 					if(facing == Facing.Left && Input.GetAxis("Horizontal") > 0)
 					{
 						state = State.Default;
-						animator.Play("MegaManIdle", -1, 0);
+						animator.Play("MegaManIdle", 0, 0);
 					}
 					else if (facing == Facing.Right && Input.GetAxis("Horizontal") < 0)
 					{
 						state = State.Default;
-						animator.Play("MegaManIdle", -1, 0);
+						animator.Play("MegaManIdle", 0, 0);
 					}
 					
 					// Jumping while sliding cancels it
@@ -202,7 +219,7 @@ public class Player : MonoBehaviour
 					{
 						yVelocity = jumpSpeed;
 						state = State.Jump;
-						animator.Play("MegaManJump", -1, 0);
+						animator.Play("MegaManJump", 0, 0);
 					}
 					
 					dashTimer -= Time.deltaTime/dashTime;
@@ -211,7 +228,7 @@ public class Player : MonoBehaviour
 				else
 				{
 					state = State.Default;
-					animator.Play("MegaManIdle", -1, 0);
+					animator.Play("MegaManIdle", 0, 0);
 				}
 				break;
 			case State.WalkStart:
@@ -232,13 +249,13 @@ public class Player : MonoBehaviour
 				if(Input.GetAxis("Horizontal") == 0)
 				{
 					state = State.Default;
-					animator.Play("MegaManIdle", -1, 0);
+					animator.Play("MegaManIdle", 0, 0);
 				}
 				// Sliding
 				if(Input.GetButtonDown("Jump") && Input.GetAxis("Vertical") < 0)
 				{
 					state = State.Slide;
-					animator.Play("MegaManSlide", -1, 0);
+					animator.Play("MegaManSlide", 0, 0);
 					StartSlide();
 				}
 				// Jumping
@@ -246,13 +263,13 @@ public class Player : MonoBehaviour
 				{
 					yVelocity = jumpSpeed;
 					state = State.Jump;
-					animator.Play("MegaManJump", -1, 0);
+					animator.Play("MegaManJump", 0, 0);
 				}
 				// Falling
 				else if(!onGround)
 				{
 					state = State.Jump;
-					animator.Play("MegaManJump", -1, 0);
+					animator.Play("MegaManJump", 0, 0);
 				}
 				
 				if(walkStartTimer > 0)
@@ -263,7 +280,7 @@ public class Player : MonoBehaviour
 				{
 					state = State.Walk;
 					walkTimer = 0;
-					animator.Play("MegaManWalk", -1, 0);
+					animator.Play("MegaManWalk", 0, 0);
 				}
 				
 				break;
@@ -278,24 +295,24 @@ public class Player : MonoBehaviour
 				
 				if(shooting)
 				{
-					animator.Play("MegaManShootWalk", -1, walkTimer/walkAnimation.length);
+					animator.Play("MegaManShootWalk", 0, walkTimer/walkAnimation.length);
 				}
 				else
 				{
-					animator.Play("MegaManWalk", -1, walkTimer/walkAnimation.length);
+					animator.Play("MegaManWalk", 0, walkTimer/walkAnimation.length);
 				}
 				
 				// Go back to default state if you stop moving
 				if(Input.GetAxis("Horizontal") == 0)
 				{
 					state = State.Default;
-					animator.Play("MegaManIdle", -1, 0);
+					animator.Play("MegaManIdle", 0, 0);
 				}
 				// Sliding
 				if(Input.GetButtonDown("Jump") && Input.GetAxis("Vertical") < 0)
 				{
 					state = State.Slide;
-					animator.Play("MegaManSlide", -1, 0);
+					animator.Play("MegaManSlide", 0, 0);
 					StartSlide();
 				}
 				// Jumping
@@ -303,13 +320,13 @@ public class Player : MonoBehaviour
 				{
 					yVelocity = jumpSpeed;
 					state = State.Jump;
-					animator.Play("MegaManJump", -1, 0);
+					animator.Play("MegaManJump", 0, 0);
 				}
 				// Falling
 				else if(!onGround)
 				{
 					state = State.Jump;
-					animator.Play("MegaManJump", -1, 0);
+					animator.Play("MegaManJump", 0, 0);
 				}
 				
 				break;
@@ -342,6 +359,9 @@ public class Player : MonoBehaviour
 		}
 		
 		//jumpBuffering();
+		
+		// For now, you can charge at any time
+		Charge();
 		
 		// Note: I don't need to scale xVelocity by deltaTime because velocity is already scaled with time.
 		rb2d.velocity = new Vector2(xVelocity, yVelocity);
@@ -440,6 +460,81 @@ public class Player : MonoBehaviour
 		if(Input.GetButtonUp("Shoot"))
 		{
 			idleTimer = 0;
+		}
+	}
+	
+	private void Charge()
+	{
+		if(Input.GetButton("Shoot"))
+		{
+			chargeTimer += Time.deltaTime * 60;
+			frames = (int)chargeTimer;
+		}
+		else
+		{
+			chargeTimer = 0;
+			frames = 0;
+			chargeLevel = 0;
+		}
+		
+		switch(chargeLevel)
+		{
+			case 0:
+				if(frames > charge1)
+				{
+					
+				}
+				break;
+			case 1:
+				
+				break;
+			case 2:
+				
+				break;
+			case 3:
+				
+				break;
+			case 4:
+				
+				break;
+		}
+		
+		if(frames > 0 && frames < charge1)
+		{
+			
+		}
+		else if (frames > charge1 && frames < charge2)
+		{
+			if(frames%3 == 0)
+			{
+				chargeColour++;
+			}
+			
+			if(chargeColour >= 7)
+			{
+				chargeColour = 0;
+			}
+		}
+		else if (frames > charge2 && frames < charge3)
+		{
+			if(frames%3 == 0)
+			{
+				
+			}
+		}
+		else if (frames > charge3 && frames < charge4)
+		{
+			if(frames%3 == 0)
+			{
+				
+			}
+		}
+		else if (frames > charge4)
+		{
+			if(frames%3 == 0)
+			{
+				
+			}
 		}
 	}
 }
