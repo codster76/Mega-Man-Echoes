@@ -139,10 +139,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		// Pause while time is stopped
+		if(Time.timeScale == 0)
+		{
+			return;
+		}
+		
 		switch(state)
 		{
 			case State.Teleport:
-				sprite.enabled = false;
+				sprite.enabled = false; // Mega Man's actual sprite is invisible while teleporting in
 				if(teleportTimer > 0)
 				{
 					teleportTimer -= Time.deltaTime;

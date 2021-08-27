@@ -1,0 +1,18 @@
+Scripts Involved:
+ScreenTransition
+	Attached to the player. It handles the actual screen transition.
+
+	Parameters:
+		Animator cameraAnimator: Attached to the camera's parent
+		Transform camera: Camera's position
+		ScreenTransitionInfo screenTransition: The information about the screen transition, which should be attached to the scene transition
+
+ResumeTime
+	Attached to the camera's parent. It just calls the resumeTime function from screenTransition. This is necessary so that it can be accessed via animation events.
+
+ScreenTransitionInfo
+	Attached to screen transition triggers. They just contain the information about what kind of screen transition should be performed when they are touched.
+
+	Parameters:
+		Transform cameraPosition: A position to move the camera after the animation.
+		string direction: which screen transition to use.

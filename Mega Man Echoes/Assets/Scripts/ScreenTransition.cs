@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ScreenTransition : MonoBehaviour
 {
+	// Explanation for screen transitions in Assets/Documentation/Screen Transitions.txt
+	
     public Animator cameraAnimator; // The camera's animator
 	public Transform camera;
 	private ScreenTransitionInfo screenTransition;
