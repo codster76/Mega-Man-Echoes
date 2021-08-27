@@ -12,7 +12,12 @@ public class CameraFollow : MonoBehaviour
 		{
 			camera.transform.position = new Vector3(transform.position.x,camera.transform.position.y,camera.transform.position.z);
 		}
-		else if(c.gameObject.tag == "Static Zone")
+	}
+	
+	void OnTriggerEnter2D(Collider2D c)
+	{
+		// Might potentially cause collision issues, but it's here for a bit of optimisation.
+		if(c.gameObject.tag == "Static Zone")
 		{
 			camera.transform.position = c.transform.position;
 		}

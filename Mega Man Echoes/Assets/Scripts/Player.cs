@@ -69,10 +69,17 @@ public class Player : MonoBehaviour
 	
 	private float chargeTimer;
 	
+	public float charge0 = 20f;
+	public float charge1 = 34f;
+	public float charge2 = 50f;
+	public float charge3 = 66f;
+	public float charge4 = 82f;
+	
+	/*public float charge0 = 0.3f;
 	public float charge1 = 0.567f;
 	public float charge2 = 0.833f;
 	public float charge3 = 1.1f;
-	public float charge4 = 1.367f;
+	public float charge4 = 1.367f;*/
 	
 	
 	enum State
@@ -92,6 +99,7 @@ public class Player : MonoBehaviour
 	enum WeaponState
 	{
 		Default,
+		Charge0,
 		Charge1,
 		Charge2,
 		Charge3,
@@ -378,10 +386,31 @@ public class Player : MonoBehaviour
 		switch(weaponState)
 		{
 			case WeaponState.Default:
+				if(chargeTimer > charge0)
+				{
+					animator.Play("MegaManNoCharge", 1, 0);
+					weaponState = WeaponState.Charge0;
+				}
+				if(Input.GetButtonUp("Shoot"))
+				{
+					chargeTimer = 0;
+				}
+				break;
+			case WeaponState.Charge0:
 				if(chargeTimer > charge1)
 				{
 					animator.Play("MegaManCharge1", 1, 0);
 					weaponState = WeaponState.Charge1;
+				}
+				if(Input.GetButtonUp("Shoot"))
+				{
+					animator.Play("MegaManNoCharge", 1, 0);
+					chargeTimer = 0;
+					weaponState = WeaponState.Default;
+					if(shotPool.poolCount() > 0 && chargeShot2Pool.poolCount() > 0 && chargeShot1Pool.poolCount() > 0)
+					{
+						CreateShot(shotPool, projectileSpeed);
+					}
 				}
 				break;
 			case WeaponState.Charge1:

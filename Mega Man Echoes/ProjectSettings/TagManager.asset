@@ -8,6 +8,7 @@ TagManager:
   - Damageable
   - Follow Zone
   - Static Zone
+  - Screen Transition
   layers:
   - Default
   - TransparentFX
