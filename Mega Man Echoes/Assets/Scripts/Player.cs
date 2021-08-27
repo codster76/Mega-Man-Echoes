@@ -365,6 +365,10 @@ public class Player : MonoBehaviour
 				{
 					state = State.Default;
 					animator.Play("MegaManIdle", 0, 0);
+					
+					//Reset charged shot
+					animator.Play("MegaManNoCharge", 1, 0);
+					weaponState = WeaponState.Default;
 				}
 				break;
 			case State.Climb:

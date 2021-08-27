@@ -8,7 +8,13 @@ public class CameraFollow : MonoBehaviour
 	
 	void OnTriggerStay2D(Collider2D c)
 	{
-		camera.transform.position = new Vector3(transform.position.x,camera.transform.position.y,camera.transform.position.z);
-		Debug.Log("a");
+		if(c.gameObject.tag == "Follow Zone")
+		{
+			camera.transform.position = new Vector3(transform.position.x,camera.transform.position.y,camera.transform.position.z);
+		}
+		else if(c.gameObject.tag == "Static Zone")
+		{
+			camera.transform.position = c.transform.position;
+		}
 	}
 }
