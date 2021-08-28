@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3066423123251018004}
   - component: {fileID: 3066423123251018003}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Charged Shot 2 Pool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 3066423123328350276}
   - component: {fileID: 3066423123328350278}
   - component: {fileID: 3066423123328350277}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ground Detection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3066423123428419001}
   - component: {fileID: 3066423123428419003}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Teleport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 3066423123737172290}
   - component: {fileID: 3066423123737172292}
   - component: {fileID: 3066423123737172291}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ceiling Detection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 3066423124200191739}
   - component: {fileID: 3066423124200191740}
   - component: {fileID: 3066423124200191741}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3066423124200191717}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -354,7 +354,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.04, y: 0.04}
+  m_Size: {x: 1.5, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -399,18 +399,21 @@ MonoBehaviour:
   runSpeed: 5.125
   stepSpeed: 2
   jumpSpeed: 16
+  hurtSpeed: 1
   gravity: 45
   shootTime: 0.3
   walkStartTime: 0.075
   walkAnimation: {fileID: 7400000, guid: 05c70b0a39d0f004eb52e7dad50e67e1, type: 2}
   teleport: {fileID: 7400000, guid: b53066d4b0db677499cb776ac65dde9b, type: 2}
   idleAnimation: {fileID: 7400000, guid: 7cddd1b90206539458c07937d8c27c57, type: 2}
+  hurtAnimation: {fileID: 7400000, guid: 9a8aa5fd63e81b44faea9a15971da818, type: 2}
   projectileSpeed: 15.8
   shotPool: {fileID: 3066423124880524440}
   chargeShot1Speed: 15.8
   chargeShot1Pool: {fileID: 3066423125178327189}
   chargeShot2Speed: 15.8
   chargeShot2Pool: {fileID: 3066423123251018003}
+  charge0: 20
   charge1: 34
   charge2: 50
   charge3: 66
@@ -433,7 +436,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.5, y: 1.5}
-    newSize: {x: 0.04, y: 0.04}
+    newSize: {x: 1.5, y: 1.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -496,7 +499,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3066423124880524441}
   - component: {fileID: 3066423124880524440}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Normal Shot Pool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -542,7 +545,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3066423125178327188}
   - component: {fileID: 3066423125178327189}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Charged Shot 1 Pool
   m_TagString: Untagged
   m_Icon: {fileID: 0}

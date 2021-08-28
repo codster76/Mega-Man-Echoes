@@ -6100,60 +6100,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3066423123251018002, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423123328350275, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423123428419000, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423123737172289, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 3066423124200191717, guid: 23e60384b5d916d4880614d8fbb0b7e5,
         type: 3}
       propertyPath: m_Name
       value: Character
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423124200191717, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423124200191719, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423124200191719, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423124200191736, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423124200191736, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423124200191736, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3066423124200191737, guid: 23e60384b5d916d4880614d8fbb0b7e5,
         type: 3}
@@ -6209,36 +6159,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423124200191738, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: charge0
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423124200191738, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: hurtTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423124200191738, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: hurtSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423124200191738, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: hurtAnimation
-      value: 
-      objectReference: {fileID: 7400000, guid: 9a8aa5fd63e81b44faea9a15971da818, type: 2}
-    - target: {fileID: 3066423124880524423, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423125178327187, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23e60384b5d916d4880614d8fbb0b7e5, type: 3}
