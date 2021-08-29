@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	private Rigidbody2D rb2d;
+	private BoxCollider2D collider;
 	
 	public float dashDistance = 4.05f;
 	public float dashTime = 0.43f;
@@ -67,6 +68,10 @@ public class Player : MonoBehaviour
 	public float chargeShot2Speed;
 	public ObjectPoolClass chargeShot2Pool;
 	
+	private bool touchingLadder;
+	private bool groundTest;
+	public LayerMask environment;
+	
 	private float chargeTimer;
 	
 	public float charge0 = 20f;
@@ -128,12 +133,15 @@ public class Player : MonoBehaviour
         rb2d = gameObject.GetComponent<Rigidbody2D>();
 		animator = gameObject.GetComponent<Animator>();
 		sprite = gameObject.GetComponent<SpriteRenderer>();
+		collider = gameObject.GetComponent<BoxCollider2D>();
 		
 		facing = Facing.Right;
 		
 		state = State.Teleport;
 		teleportTimer = teleport.length;
 		animator.Play("Teleport", -1, 0);
+		
+		touchingLadder = false;
     }
 
     // Update is called once per frame
@@ -207,6 +215,12 @@ public class Player : MonoBehaviour
 				{
 					state = State.Jump;
 					animator.Play("MegaManJump", 0, 0);
+				}
+				
+				// Climbing
+				if(Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 0)
+				{
+					
 				}
 				
 				break;
@@ -511,6 +525,28 @@ public class Player : MonoBehaviour
 		else
 		{
 			shooting = false;
+		}
+		
+		// Ladder detection (I want to detect ladders from the centre of mega man, rather than using his whole collider)
+		RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.up, collider.size.y/2, environment);
+		if(hitInfo.collider != null)
+		{
+			touchingLadder = true;
+		}
+		else
+		{
+			touchingLadder = false;
+		}
+		
+		RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, collider.size.y/2, environment);
+		if(hit.collider != null)
+		{
+			Debug.Log("touched");
+			groundTest = true;
+		}
+		else
+		{
+			groundTest = false;
 		}
 		
 		//jumpBuffering();

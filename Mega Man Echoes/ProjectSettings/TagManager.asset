@@ -9,6 +9,9 @@ TagManager:
   - Follow Zone
   - Static Zone
   - Screen Transition
+  - Ceiling Detection
+  - Ground Detection
+  - Ladder
   layers:
   - Default
   - TransparentFX
@@ -24,7 +27,7 @@ TagManager:
   - EnemyBody
   - Player
   - Environment
-  - 
+  - One Way Platform
   - 
   - 
   - 
