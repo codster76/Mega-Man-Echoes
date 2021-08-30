@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GroundDetection : MonoBehaviour
 {
-	private Player player;
+	/*private Player player;
 	
 	void Start()
 	{
@@ -25,4 +25,5 @@ public class GroundDetection : MonoBehaviour
 	{
 		player.SetGround(false);
 	}
+	*/
 }

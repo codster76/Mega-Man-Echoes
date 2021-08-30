@@ -527,6 +527,14 @@ public class Player : MonoBehaviour
 			shooting = false;
 		}
 		
+		//jumpBuffering();
+		
+		// For now, you can charge at any time
+		Charge();
+    }
+	
+	void FixedUpdate()
+	{
 		// Ladder detection (I want to detect ladders from the centre of mega man, rather than using his whole collider)
 		RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.up, collider.size.y/2, environment);
 		if(hitInfo.collider != null)
@@ -538,25 +546,25 @@ public class Player : MonoBehaviour
 			touchingLadder = false;
 		}
 		
-		RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, collider.size.y/2, environment);
+		// There's a potential problem with floating point errors where this raycast can't detect the ground when standing on corners. Seems to be fixed, but keep an eye on it.
+		// The +0.05f is just to make sure the boxcast can detect the ground. Collisions in unity aren't completely perfect, so I need to check slightly outside the collider for the ground.
+		RaycastHit2D hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, collider.size.y/2), 0, Vector2.down, collider.size.y/4 + 0.05f, environment);
 		if(hit.collider != null)
 		{
-			Debug.Log("touched");
-			groundTest = true;
+			if(!onGround)
+			{
+				yVelocity = 0;
+			}
+			onGround = true;
 		}
 		else
 		{
-			groundTest = false;
+			onGround = false;
 		}
-		
-		//jumpBuffering();
-		
-		// For now, you can charge at any time
-		Charge();
 		
 		// Note: I don't need to scale xVelocity by deltaTime because velocity is already scaled with time.
 		rb2d.velocity = new Vector2(xVelocity, yVelocity);
-    }
+	}
 	
 	void OnTriggerEnter2D(Collider2D c)
 	{
@@ -577,10 +585,10 @@ public class Player : MonoBehaviour
 		dashTimer = 0;
 	}
 	
-	public void SetGround(bool ground)
+	/*public void SetGround(bool ground)
 	{
 		onGround = ground;
-	}
+	}*/
 	
 	public void StopJump()
 	{
@@ -590,10 +598,10 @@ public class Player : MonoBehaviour
 		}
 	}
 	
-	public void ResetYVelocity()
+	/*public void ResetYVelocity()
 	{
 		yVelocity = 0;
-	}
+	}*/
 	
 	private void Move()
 	{
