@@ -68,12 +68,14 @@ public class Player : MonoBehaviour
 	public ObjectPoolClass chargeShot2Pool;
 	
 	private bool touchingLadder;
+	private bool ladderTop;
 	private bool groundTest;
 	
 	public LayerMask environment;
 	public LayerMask ladder;
 	
 	private float ladderPos = 0;
+	private RaycastHit2D hit;
 	
 	private float chargeTimer;
 	
@@ -455,6 +457,15 @@ public class Player : MonoBehaviour
 					animator.Play("MegaManIdle", 0, 0);
 				}
 				
+				if(ladderTop)
+				{
+					animator.Play("MegaManLadderTop", 0, 0);
+				}
+				else
+				{
+					animator.Play("MegaManClimb", 0, 0);
+				}
+				
 				if(Input.GetAxis("Vertical") < 0)
 				{
 					animator.speed = 1f;
@@ -615,11 +626,14 @@ public class Player : MonoBehaviour
 	void FixedUpdate()
 	{
 		// Ladder detection (I want to detect ladders from the centre of mega man, rather than using his whole collider)
-		RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y-collider.size.y/2), Vector2.up, collider.size.y/2, ladder);
+		hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y-collider.size.y/2), Vector2.up, collider.size.y/2, ladder);
 		if(hit.collider != null)
 		{
-			touchingLadder = true;
-			ladderPos = hit.collider.transform.position.x;
+			if(hit.collider.gameObject.tag == "Ladder")
+			{
+				touchingLadder = true;
+				ladderPos = hit.collider.transform.position.x;
+			}
 		}
 		else
 		{
@@ -671,6 +685,19 @@ public class Player : MonoBehaviour
 			xVelocity = 0;
 			hurtTimer = hurtAnimation.length;
 			StopJump();
+		}
+		
+		if(c.gameObject.tag == "Ladder Top")
+		{
+			ladderTop = true;
+		}
+	}
+	
+	void OnTriggerExit2D(Collider2D c)
+	{
+		if(c.gameObject.tag == "Ladder Top")
+		{
+			ladderTop = false;
 		}
 	}
 	
