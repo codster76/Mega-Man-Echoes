@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
 	public float stepSpeed; // Speed before accelerating to full speed
 	public float jumpSpeed = 16f; // Speed of jumping
 	public float hurtSpeed; // Speed while being knocked back
+	public float climbSpeed = 4.8f;
 	
 	private float gravity;
 	public float normalGravity = 45f;
@@ -72,6 +73,8 @@ public class Player : MonoBehaviour
 	public LayerMask environment;
 	public LayerMask ladder;
 	
+	private float ladderPos = 0;
+	
 	private float chargeTimer;
 	
 	public float charge0 = 20f;
@@ -111,7 +114,6 @@ public class Player : MonoBehaviour
 	/*
 	- You can released charged shots while sliding
 	- Climbing
-		- Climb animation speed
 	- Hurt
 	- Slide particles
 	- Hurt particles
@@ -221,6 +223,7 @@ public class Player : MonoBehaviour
 						animator.Play("MegaManClimb", 0, 0);
 						state = State.Climb;
 						xVelocity = 0;
+						transform.position = new Vector3(ladderPos, transform.position.y, transform.position.z);
 					}
 				}
 				
@@ -262,6 +265,7 @@ public class Player : MonoBehaviour
 						animator.Play("MegaManClimb", 0, 0);
 						state = State.Climb;
 						xVelocity = 0;
+						transform.position = new Vector3(ladderPos, transform.position.y, transform.position.z);
 					}
 				}
 				
@@ -352,6 +356,7 @@ public class Player : MonoBehaviour
 						animator.Play("MegaManClimb", 0, 0);
 						state = State.Climb;
 						xVelocity = 0;
+						transform.position = new Vector3(ladderPos, transform.position.y, transform.position.z);
 					}
 				}
 				
@@ -410,6 +415,7 @@ public class Player : MonoBehaviour
 						animator.Play("MegaManClimb", 0, 0);
 						state = State.Climb;
 						xVelocity = 0;
+						transform.position = new Vector3(ladderPos, transform.position.y, transform.position.z);
 					}
 				}
 				
@@ -452,12 +458,12 @@ public class Player : MonoBehaviour
 				if(Input.GetAxis("Vertical") < 0)
 				{
 					animator.speed = 1f;
-					yVelocity = -10f;
+					yVelocity = -climbSpeed;
 				}
 				else if(Input.GetAxis("Vertical") > 0)
 				{
 					animator.speed = 1f;
-					yVelocity = 10f;
+					yVelocity = climbSpeed;
 				}
 				else
 				{
@@ -613,6 +619,7 @@ public class Player : MonoBehaviour
 		if(hit.collider != null)
 		{
 			touchingLadder = true;
+			ladderPos = hit.collider.transform.position.x;
 		}
 		else
 		{
