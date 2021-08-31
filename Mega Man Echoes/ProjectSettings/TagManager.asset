@@ -27,7 +27,7 @@ TagManager:
   - EnemyBody
   - Player
   - Environment
-  - One Way Platform
+  - RaycastOnly
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Player
+    uniqueID: 976458323
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

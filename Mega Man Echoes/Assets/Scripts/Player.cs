@@ -18,25 +18,23 @@ public class Player : MonoBehaviour
 	};
 	private Facing facing;
 	
-	private bool jumpBuffer;
-	public float jumpBufferTime;
-	private float jumpBufferTimer;
-	
 	private Vector2 dashTarget;
 	private Vector2 dashStart;
 	
 	private bool onGround;
+	private bool hitCeiling;
 	
 	private float yVelocity;
 	private float xVelocity;
 	
-	private float moveSpeed;
-	public float runSpeed = 5.125f;
-	public float stepSpeed;
-	public float jumpSpeed = 16f;
-	public float hurtSpeed;
+	private float moveSpeed; // Current movement speed
+	public float runSpeed = 5.125f; // Regular movement speed
+	public float stepSpeed; // Speed before accelerating to full speed
+	public float jumpSpeed = 16f; // Speed of jumping
+	public float hurtSpeed; // Speed while being knocked back
 	
-	public float gravity = 45f;
+	private float gravity;
+	public float normalGravity = 45f;
 	
 	private bool shooting;
 	public float shootTime = 0.3f;
@@ -70,7 +68,9 @@ public class Player : MonoBehaviour
 	
 	private bool touchingLadder;
 	private bool groundTest;
+	
 	public LayerMask environment;
+	public LayerMask ladder;
 	
 	private float chargeTimer;
 	
@@ -79,12 +79,6 @@ public class Player : MonoBehaviour
 	public float charge2 = 50f;
 	public float charge3 = 66f;
 	public float charge4 = 82f;
-	
-	/*public float charge0 = 0.3f;
-	public float charge1 = 0.567f;
-	public float charge2 = 0.833f;
-	public float charge3 = 1.1f;
-	public float charge4 = 1.367f;*/
 	
 	
 	enum State
@@ -117,6 +111,7 @@ public class Player : MonoBehaviour
 	/*
 	- You can released charged shots while sliding
 	- Climbing
+		- Climb animation speed
 	- Hurt
 	- Slide particles
 	- Hurt particles
@@ -142,6 +137,7 @@ public class Player : MonoBehaviour
 		animator.Play("Teleport", -1, 0);
 		
 		touchingLadder = false;
+		hitCeiling = false;
     }
 
     // Update is called once per frame
@@ -156,6 +152,7 @@ public class Player : MonoBehaviour
 		switch(state)
 		{
 			case State.Teleport:
+				gravity = 0f;
 				sprite.enabled = false; // Mega Man's actual sprite is invisible while teleporting in
 				if(teleportTimer > 0)
 				{
@@ -170,6 +167,7 @@ public class Player : MonoBehaviour
 				break;
 			case State.Default:
 				Shoot();
+				gravity = normalGravity;
 				
 				// Idle animation is a bit buggy (seems to be a lot shorter in the animator than the animation length indicates), so fix it later
 				idleTimer += Time.deltaTime;
@@ -203,14 +201,12 @@ public class Player : MonoBehaviour
 					animator.Play("MegaManSlide", 0, 0);
 					StartSlide();
 				}
-				//else if(jumpBuffer && onGround) // Jumping
 				else if(Input.GetButtonDown("Jump") && onGround) // Jumping
 				{
 					yVelocity = jumpSpeed;
 					state = State.Jump;
 					animator.Play("MegaManJump", 0, 0);
 				}
-				//else if(Input.GetButtonUp("Jump") && yVelocity > 0)
 				else if(!onGround)
 				{
 					state = State.Jump;
@@ -220,12 +216,18 @@ public class Player : MonoBehaviour
 				// Climbing
 				if(Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 0)
 				{
-					
+					if(touchingLadder)
+					{
+						animator.Play("MegaManClimb", 0, 0);
+						state = State.Climb;
+						xVelocity = 0;
+					}
 				}
 				
 				break;
 			case State.Jump:
 				moveSpeed = runSpeed;
+				gravity = normalGravity;
 				Move(); // Allow horizontal movement while jumping
 				Shoot();
 				
@@ -252,9 +254,21 @@ public class Player : MonoBehaviour
 					animator.Play("MegaManWalk", 0, 0);
 				}
 				
+				// Climbing
+				if(Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 0)
+				{
+					if(touchingLadder)
+					{
+						animator.Play("MegaManClimb", 0, 0);
+						state = State.Climb;
+						xVelocity = 0;
+					}
+				}
+				
 				break;
 			case State.Slide:
 				moveSpeed = 0;
+				gravity = normalGravity;
 				if(dashTimer > 0)
 				{
 					// Moving in the opposite direction of a slide cancels it
@@ -288,6 +302,7 @@ public class Player : MonoBehaviour
 				break;
 			case State.WalkStart:
 				moveSpeed = stepSpeed;
+				gravity = normalGravity;
 				Move();
 				Shoot();
 				
@@ -329,9 +344,21 @@ public class Player : MonoBehaviour
 					animator.Play("MegaManWalk", 0, 0);
 				}
 				
+				// Climbing
+				if(Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 0)
+				{
+					if(touchingLadder)
+					{
+						animator.Play("MegaManClimb", 0, 0);
+						state = State.Climb;
+						xVelocity = 0;
+					}
+				}
+				
 				break;
 			case State.Walk:
 				moveSpeed = runSpeed;
+				gravity = normalGravity;
 				Move();
 				Shoot();
 				
@@ -375,8 +402,20 @@ public class Player : MonoBehaviour
 					animator.Play("MegaManJump", 0, 0);
 				}
 				
+				// Climbing
+				if(Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 0)
+				{
+					if(touchingLadder)
+					{
+						animator.Play("MegaManClimb", 0, 0);
+						state = State.Climb;
+						xVelocity = 0;
+					}
+				}
+				
 				break;
 			case State.Hurt: // For some reason, knockback isn't working
+				gravity = normalGravity;
 				if(facing == Facing.Left)
 				{
 					moveSpeed = hurtSpeed;
@@ -400,6 +439,40 @@ public class Player : MonoBehaviour
 				}
 				break;
 			case State.Climb:
+				moveSpeed = 0f;
+				gravity = 0f;
+				if(!touchingLadder)
+				{
+					animator.speed = 1f;
+					yVelocity = 0f;
+					state = State.Default;
+					animator.Play("MegaManIdle", 0, 0);
+				}
+				
+				if(Input.GetAxis("Vertical") < 0)
+				{
+					animator.speed = 1f;
+					yVelocity = -10f;
+				}
+				else if(Input.GetAxis("Vertical") > 0)
+				{
+					animator.speed = 1f;
+					yVelocity = 10f;
+				}
+				else
+				{
+					animator.speed = 0f;
+					yVelocity = 0f;
+				}
+				
+				// Jumping to cancel climbing
+				if(Input.GetButtonDown("Jump"))
+				{
+					animator.speed = 1f;
+					yVelocity = 0f;
+					state = State.Jump;
+					animator.Play("MegaManJump", 0, 0);
+				}
 				break;
 		}
 		
@@ -536,8 +609,8 @@ public class Player : MonoBehaviour
 	void FixedUpdate()
 	{
 		// Ladder detection (I want to detect ladders from the centre of mega man, rather than using his whole collider)
-		RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.up, collider.size.y/2, environment);
-		if(hitInfo.collider != null)
+		RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y-collider.size.y/2), Vector2.up, collider.size.y/2, ladder);
+		if(hit.collider != null)
 		{
 			touchingLadder = true;
 		}
@@ -548,7 +621,7 @@ public class Player : MonoBehaviour
 		
 		// There's a potential problem with floating point errors where this raycast can't detect the ground when standing on corners. Seems to be fixed, but keep an eye on it.
 		// The +0.05f is just to make sure the boxcast can detect the ground. Collisions in unity aren't completely perfect, so I need to check slightly outside the collider for the ground.
-		RaycastHit2D hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, collider.size.y/2), 0, Vector2.down, collider.size.y/4 + 0.05f, environment);
+		hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, collider.size.y/2), 0, Vector2.down, collider.size.y/4 + 0.05f, environment);
 		if(hit.collider != null)
 		{
 			if(!onGround)
@@ -560,6 +633,20 @@ public class Player : MonoBehaviour
 		else
 		{
 			onGround = false;
+		}
+		
+		hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, collider.size.y/2), 0, Vector2.up, collider.size.y/4 + 0.05f, environment);
+		if(hit.collider != null)
+		{
+			if(!hitCeiling)
+			{
+				yVelocity = 0;
+			}
+			hitCeiling = true;
+		}
+		else
+		{
+			hitCeiling = false;
 		}
 		
 		// Note: I don't need to scale xVelocity by deltaTime because velocity is already scaled with time.
