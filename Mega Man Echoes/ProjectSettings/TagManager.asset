@@ -12,6 +12,7 @@ TagManager:
   - Ceiling Detection
   - Ground Detection
   - Ladder
+  - Ladder Top
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - Player
   - Environment
   - RaycastOnly
-  - 
+  - Trigger
   - 
   - 
   - 
