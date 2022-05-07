@@ -33,6 +33,10 @@ public class Player : MonoBehaviour
 	public float jumpSpeed = 16f; // Speed of jumping
 	public float hurtSpeed; // Speed while being knocked back
 	public float climbSpeed = 4.8f;
+
+	public float standardHitboxHeight;
+	public float slidingHitboxHeight; // The hitbox also needs to be offset downwards by half of this value
+	public float slideContinueSpeed; // If a slide needs to continue past its regular distance, it uses this speed instead (lerp is used for normal sliding, so it can't use this)
 	
 	private float gravity;
 	public float normalGravity = 45f;
@@ -69,12 +73,14 @@ public class Player : MonoBehaviour
 	
 	private bool touchingLadder;
 	private bool ladderTop;
+	private bool ladderVeryTop;
 	private bool groundTest;
 	
 	public LayerMask environment;
 	public LayerMask ladder;
 	
 	private float ladderPos = 0;
+	private Vector3 ladderTopPosition;
 	private RaycastHit2D hit;
 	
 	private float chargeTimer;
@@ -91,6 +97,7 @@ public class Player : MonoBehaviour
 		Teleport,
 		Default,
 		Jump,
+		SlideStart,
 		Slide,
 		WalkStart,
 		Walk,
@@ -201,9 +208,10 @@ public class Player : MonoBehaviour
 				// Sliding
 				if(Input.GetButtonDown("Jump") && Input.GetAxis("Vertical") < 0)
 				{
-					state = State.Slide;
-					animator.Play("MegaManSlide", 0, 0);
-					StartSlide();
+					state = State.SlideStart;
+					//collider.offset = new Vector2(collider.offset.x, -slidingHitboxHeight/2);
+					//collider.size = new Vector2(collider.size.x, slidingHitboxHeight);
+					//transform.position = new Vector3(transform.position.x, transform.position.y - slidingHitboxHeight/2,transform.position.z);
 				}
 				else if(Input.GetButtonDown("Jump") && onGround) // Jumping
 				{
@@ -272,6 +280,18 @@ public class Player : MonoBehaviour
 				}
 				
 				break;
+			// For some reason, changing collider sizes makes the player fall, so stay in this transition state until the player hits the ground
+			case State.SlideStart:
+				onGround = true;
+				moveSpeed = 0;
+				gravity = normalGravity;
+				collider.size = new Vector2(collider.size.x, slidingHitboxHeight);
+				collider.offset = new Vector2(collider.offset.x, -slidingHitboxHeight/2);
+				state = State.Slide;
+				animator.Play("MegaManSlide", 0, 0);
+				StartSlide();
+				break;
+			// Always make sure to reset the hitbox size when leaving this state
 			case State.Slide:
 				moveSpeed = 0;
 				gravity = normalGravity;
@@ -281,11 +301,15 @@ public class Player : MonoBehaviour
 					if(facing == Facing.Left && Input.GetAxis("Horizontal") > 0)
 					{
 						state = State.Default;
+						collider.size = new Vector2(collider.size.x, standardHitboxHeight);
+						collider.offset = new Vector2(collider.offset.x, 0);
 						animator.Play("MegaManIdle", 0, 0);
 					}
 					else if (facing == Facing.Right && Input.GetAxis("Horizontal") < 0)
 					{
 						state = State.Default;
+						collider.size = new Vector2(collider.size.x, standardHitboxHeight);
+						collider.offset = new Vector2(collider.offset.x, 0);
 						animator.Play("MegaManIdle", 0, 0);
 					}
 					
@@ -294,6 +318,8 @@ public class Player : MonoBehaviour
 					{
 						yVelocity = jumpSpeed;
 						state = State.Jump;
+						collider.size = new Vector2(collider.size.x, standardHitboxHeight);
+						collider.offset = new Vector2(collider.offset.x, 0);
 						animator.Play("MegaManJump", 0, 0);
 					}
 					
@@ -303,6 +329,8 @@ public class Player : MonoBehaviour
 				else
 				{
 					state = State.Default;
+					collider.size = new Vector2(collider.size.x, standardHitboxHeight);
+					collider.offset = new Vector2(collider.offset.x, 0);
 					animator.Play("MegaManIdle", 0, 0);
 				}
 				break;
@@ -321,9 +349,10 @@ public class Player : MonoBehaviour
 				// Sliding
 				if(Input.GetButtonDown("Jump") && Input.GetAxis("Vertical") < 0)
 				{
-					state = State.Slide;
-					animator.Play("MegaManSlide", 0, 0);
-					StartSlide();
+					state = State.SlideStart;
+					//collider.offset = new Vector2(collider.offset.x, -slidingHitboxHeight/2);
+					//collider.size = new Vector2(collider.size.x, slidingHitboxHeight);
+					//transform.position = new Vector3(transform.position.x, transform.position.y - slidingHitboxHeight/2,transform.position.z);
 				}
 				// Jumping
 				else if(Input.GetButtonDown("Jump") && onGround)
@@ -391,9 +420,10 @@ public class Player : MonoBehaviour
 				// Sliding
 				if(Input.GetButtonDown("Jump") && Input.GetAxis("Vertical") < 0)
 				{
-					state = State.Slide;
-					animator.Play("MegaManSlide", 0, 0);
-					StartSlide();
+					state = State.SlideStart;
+					//collider.offset = new Vector2(collider.offset.x, -slidingHitboxHeight/2);
+					//collider.size = new Vector2(collider.size.x, slidingHitboxHeight);
+					//transform.position = new Vector3(transform.position.x, transform.position.y - slidingHitboxHeight/2,transform.position.z);
 				}
 				// Jumping
 				else if(Input.GetButtonDown("Jump") && onGround)
@@ -417,7 +447,7 @@ public class Player : MonoBehaviour
 						animator.Play("MegaManClimb", 0, 0);
 						state = State.Climb;
 						xVelocity = 0;
-						transform.position = new Vector3(ladderPos, transform.position.y, transform.position.z);
+						transform.position = new Vector3(ladderPos, transform.position.y, transform.position.z); // Centres you on the ladder
 					}
 				}
 				
@@ -463,7 +493,16 @@ public class Player : MonoBehaviour
 				}
 				else
 				{
+					//Issue: this resets the climbing animation whenever the player isn't at the top of the ladder
 					animator.Play("MegaManClimb", 0, 0);
+				}
+				
+				if(ladderVeryTop)
+				{
+					transform.position = ladderTopPosition;
+					onGround = true;
+					state = State.Default;
+					animator.Play("MegaManIdle", 0, 0);
 				}
 				
 				if(Input.GetAxis("Vertical") < 0)
@@ -642,7 +681,7 @@ public class Player : MonoBehaviour
 		
 		// There's a potential problem with floating point errors where this raycast can't detect the ground when standing on corners. Seems to be fixed, but keep an eye on it.
 		// The +0.05f is just to make sure the boxcast can detect the ground. Collisions in unity aren't completely perfect, so I need to check slightly outside the collider for the ground.
-		hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, collider.size.y/2), 0, Vector2.down, collider.size.y/4 + 0.05f, environment);
+		hit = Physics2D.BoxCast(new Vector3(transform.position.x + collider.offset.x, transform.position.y + collider.offset.y, transform.position.z), new Vector2(collider.size.x, collider.size.y/2), 0, Vector2.down, collider.size.y/4 + 0.05f, environment);
 		if(hit.collider != null)
 		{
 			if(!onGround)
@@ -656,7 +695,7 @@ public class Player : MonoBehaviour
 			onGround = false;
 		}
 		
-		hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, collider.size.y/2), 0, Vector2.up, collider.size.y/4 + 0.05f, environment);
+		hit = Physics2D.BoxCast(new Vector3(transform.position.x + collider.offset.x, transform.position.y + collider.offset.y, transform.position.z), new Vector2(collider.size.x, collider.size.y/2), 0, Vector2.up, collider.size.y/4 + 0.05f, environment);
 		if(hit.collider != null)
 		{
 			if(!hitCeiling)
@@ -691,6 +730,12 @@ public class Player : MonoBehaviour
 		{
 			ladderTop = true;
 		}
+		
+		if(c.gameObject.tag == "Ladder Very Top")
+		{
+			ladderTopPosition = c.gameObject.transform.position; // When you touch the top of the ladder, it saves the position to teleport you there to avoid that weird jump at the top of every ladder
+			ladderVeryTop = true;
+		}
 	}
 	
 	void OnTriggerExit2D(Collider2D c)
@@ -698,6 +743,11 @@ public class Player : MonoBehaviour
 		if(c.gameObject.tag == "Ladder Top")
 		{
 			ladderTop = false;
+		}
+		
+		if(c.gameObject.tag == "Ladder Very Top")
+		{
+			ladderVeryTop = false;
 		}
 	}
 	

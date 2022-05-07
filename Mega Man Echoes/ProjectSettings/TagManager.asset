@@ -13,6 +13,7 @@ TagManager:
   - Ground Detection
   - Ladder
   - Ladder Top
+  - Ladder Very Top
   layers:
   - Default
   - TransparentFX
