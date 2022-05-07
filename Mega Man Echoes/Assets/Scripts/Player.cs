@@ -99,6 +99,7 @@ public class Player : MonoBehaviour
 		Jump,
 		SlideStart,
 		Slide,
+		SlideContinue,
 		WalkStart,
 		Walk,
 		Hurt,
@@ -282,9 +283,6 @@ public class Player : MonoBehaviour
 				break;
 			// For some reason, changing collider sizes makes the player fall, so stay in this transition state until the player hits the ground
 			case State.SlideStart:
-				onGround = true;
-				moveSpeed = 0;
-				gravity = normalGravity;
 				collider.size = new Vector2(collider.size.x, slidingHitboxHeight);
 				collider.offset = new Vector2(collider.offset.x, -slidingHitboxHeight/2);
 				state = State.Slide;
@@ -300,17 +298,44 @@ public class Player : MonoBehaviour
 					// Moving in the opposite direction of a slide cancels it
 					if(facing == Facing.Left && Input.GetAxis("Horizontal") > 0)
 					{
-						state = State.Default;
-						collider.size = new Vector2(collider.size.x, standardHitboxHeight);
-						collider.offset = new Vector2(collider.offset.x, 0);
-						animator.Play("MegaManIdle", 0, 0);
+						hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, standardHitboxHeight/2), 0, Vector2.down, standardHitboxHeight/4 + 0.05f, environment);
+						if(hit.collider != null)
+						{
+							//transition to slidecontinue
+							state = State.SlideContinue;
+							moveSpeed = slideContinueSpeed;
+						}
+						else
+						{
+							state = State.Default;
+							collider.size = new Vector2(collider.size.x, standardHitboxHeight);
+							collider.offset = new Vector2(collider.offset.x, 0);
+							animator.Play("MegaManIdle", 0, 0);
+						}
 					}
 					else if (facing == Facing.Right && Input.GetAxis("Horizontal") < 0)
 					{
-						state = State.Default;
-						collider.size = new Vector2(collider.size.x, standardHitboxHeight);
-						collider.offset = new Vector2(collider.offset.x, 0);
-						animator.Play("MegaManIdle", 0, 0);
+						hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, standardHitboxHeight/2), 0, Vector2.down, standardHitboxHeight/4 + 0.05f, environment);
+						if(hit.collider != null)
+						{
+							//transition to slidecontinue
+							state = State.SlideContinue;
+							if(facing == Facing.Left)
+							{
+								moveSpeed = -slideContinueSpeed;
+							}
+							else
+							{
+								moveSpeed = slideContinueSpeed;
+							}
+						}
+						else
+						{
+							state = State.Default;
+							collider.size = new Vector2(collider.size.x, standardHitboxHeight);
+							collider.offset = new Vector2(collider.offset.x, 0);
+							animator.Play("MegaManIdle", 0, 0);
+						}
 					}
 					
 					// Jumping while sliding cancels it
@@ -325,6 +350,37 @@ public class Player : MonoBehaviour
 					
 					dashTimer -= Time.deltaTime/dashTime;
 					rb2d.MovePosition(Vector2.Lerp(dashStart, dashTarget, 1-dashTimer));
+				}
+				else
+				{
+					hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, standardHitboxHeight/2), 0, Vector2.down, standardHitboxHeight/4 + 0.05f, environment);
+					if(hit.collider != null)
+					{
+						state = State.SlideContinue;
+						if(facing == Facing.Left)
+						{
+							moveSpeed = -slideContinueSpeed;
+						}
+						else
+						{
+							moveSpeed = slideContinueSpeed;
+						}
+					}
+					else
+					{
+						state = State.Default;
+						collider.size = new Vector2(collider.size.x, standardHitboxHeight);
+						collider.offset = new Vector2(collider.offset.x, 0);
+						animator.Play("MegaManIdle", 0, 0);
+					}
+				}
+				break;
+			case State.SlideContinue:
+				gravity = normalGravity;
+				hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, standardHitboxHeight/2), 0, Vector2.up, standardHitboxHeight/4 + 0.05f, environment);
+				if(hit.collider != null)
+				{
+					SlideContinue();
 				}
 				else
 				{
@@ -350,9 +406,6 @@ public class Player : MonoBehaviour
 				if(Input.GetButtonDown("Jump") && Input.GetAxis("Vertical") < 0)
 				{
 					state = State.SlideStart;
-					//collider.offset = new Vector2(collider.offset.x, -slidingHitboxHeight/2);
-					//collider.size = new Vector2(collider.size.x, slidingHitboxHeight);
-					//transform.position = new Vector3(transform.position.x, transform.position.y - slidingHitboxHeight/2,transform.position.z);
 				}
 				// Jumping
 				else if(Input.GetButtonDown("Jump") && onGround)
@@ -789,6 +842,21 @@ public class Player : MonoBehaviour
 		else
 		{
 			xVelocity = 0;
+		}
+	}
+
+	// Mainly for sliding, but you continuously move, even when you release your move buttons
+	private void SlideContinue()
+	{
+		if(Input.GetAxis("Horizontal") > 0)
+		{
+			xVelocity = slideContinueSpeed;
+			facing = Facing.Right;
+		}
+		else if(Input.GetAxis("Horizontal") < 0)
+		{
+			xVelocity = -slideContinueSpeed;
+			facing = Facing.Left;
 		}
 	}
 	
