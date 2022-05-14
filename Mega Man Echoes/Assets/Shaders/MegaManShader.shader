@@ -3,8 +3,9 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-		_ReplacementMap ("Texture", 2D) = "white" {}
+		_ReplacementMap ("Colour Palette", 2D) = "white" {}
 		_Flip ("Flip", Vector) = (1,1,1,1)
+        _Offset ("Palette Number", Float) = 0.0
     }
     SubShader
     {
@@ -36,6 +37,7 @@
             sampler2D _MainTex;
 			sampler2D _ReplacementMap; // A texture that's 255x1 in size. Colour pixels at coordinates based on the r values on the original texture
             float4 _MainTex_ST;
+            float _Offset;
 
             v2f vert (appdata v)
             {
@@ -56,7 +58,8 @@
                 float4 col = tex2D(_MainTex, i.uv);
 				
 				// using the red value as a coordinate, get the pixel at that x value from the second image
-				col.rgb = tex2D(_ReplacementMap, float2(coord, 0)).rgb;
+				col.rgb = tex2D(_ReplacementMap, float2(coord + ((_Offset*4)/255), 0)).rgb;
+                //col.rgb = tex2D(_ReplacementMap, float2(coord, 0)).rgb;
 				
                 return col * col.a;
             }

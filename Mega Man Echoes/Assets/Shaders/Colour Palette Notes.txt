@@ -1,0 +1,9 @@
+How My Colour Replacement Maps Work:
+
+Basically, the shader takes the main sprite, then uses the red value of each pixel to determine the coordinates to get colours from in the replacement map.
+
+r value of 255 will always be white
+
+Really annoying thing: texture coordinates start counting from 1, so the r values of the main sprites need to be increased by 1 more than you'd expect.
+
+On the colour palette sprite, you can place 4 colours + white. That's all I've made space for (at least for Mega Man's sprites)

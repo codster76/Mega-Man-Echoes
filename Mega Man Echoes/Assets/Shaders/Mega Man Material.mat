@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MegaManCharge1
+  m_Name: Mega Man Material
   m_Shader: {fileID: 4800000, guid: bddc5883c27eed246a8b6e92d2cb9403, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ReplacementMap:
-        m_Texture: {fileID: 2800000, guid: 0193183b16ce49740af3217c3c56b22d, type: 3}
+        m_Texture: {fileID: 2800000, guid: cf39dbe9bfd84ed4eb8b03224cf84f3b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -70,6 +70,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Offset: 0
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
