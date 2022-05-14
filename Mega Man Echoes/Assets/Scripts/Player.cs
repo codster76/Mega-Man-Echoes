@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 		Right
 	};
 	private Facing facing;
+	private Facing lastPressed;
 	
 	private Vector2 dashTarget;
 	private Vector2 dashStart;
@@ -70,7 +71,8 @@ public class Player : MonoBehaviour
 	
 	public float chargeShot2Speed;
 	public ObjectPoolClass chargeShot2Pool;
-	
+	private bool canShoot;
+
 	private bool touchingLadder;
 	private bool ladderTop;
 	private bool ladderVeryTop;
@@ -90,7 +92,6 @@ public class Player : MonoBehaviour
 	public float charge2 = 50f;
 	public float charge3 = 66f;
 	public float charge4 = 82f;
-	
 	
 	enum State
 	{
@@ -160,10 +161,20 @@ public class Player : MonoBehaviour
 		{
 			return;
 		}
+
+		if(Input.GetAxis("Horizontal") > 0)
+		{
+			lastPressed = Facing.Right;
+		}
+		else if (Input.GetAxis("Horizontal") < 0)
+		{
+			lastPressed = Facing.Left;
+		}
 		
 		switch(state)
 		{
 			case State.Teleport:
+				canShoot = false;
 				gravity = 0f;
 				sprite.enabled = false; // Mega Man's actual sprite is invisible while teleporting in
 				if(teleportTimer > 0)
@@ -283,6 +294,7 @@ public class Player : MonoBehaviour
 				break;
 			// For some reason, changing collider sizes makes the player fall, so stay in this transition state until the player hits the ground
 			case State.SlideStart:
+				canShoot = false;
 				collider.size = new Vector2(collider.size.x, slidingHitboxHeight);
 				collider.offset = new Vector2(collider.offset.x, -slidingHitboxHeight/2);
 				state = State.Slide;
@@ -291,19 +303,25 @@ public class Player : MonoBehaviour
 				break;
 			// Always make sure to reset the hitbox size when leaving this state
 			case State.Slide:
+				canShoot = false;
 				moveSpeed = 0;
 				gravity = normalGravity;
 				if(dashTimer > 0)
 				{
+					dashTimer -= Time.deltaTime/dashTime;
+					rb2d.MovePosition(Vector2.Lerp(dashStart, dashTarget, 1-dashTimer));
+
 					// Moving in the opposite direction of a slide cancels it
 					if(facing == Facing.Left && Input.GetAxis("Horizontal") > 0)
 					{
-						hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, standardHitboxHeight/2), 0, Vector2.down, standardHitboxHeight/4 + 0.05f, environment);
+						// Check if there's something above you before standing back up
+						//hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, standardHitboxHeight/2), 0, Vector2.down, standardHitboxHeight/4 + 0.05f, environment);
+						hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, slidingHitboxHeight/2), 0, Vector2.up, slidingHitboxHeight/4 + 0.05f, environment);
 						if(hit.collider != null)
 						{
 							//transition to slidecontinue
 							state = State.SlideContinue;
-							moveSpeed = slideContinueSpeed;
+							moveSpeed = -slideContinueSpeed;
 						}
 						else
 						{
@@ -315,19 +333,12 @@ public class Player : MonoBehaviour
 					}
 					else if (facing == Facing.Right && Input.GetAxis("Horizontal") < 0)
 					{
-						hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, standardHitboxHeight/2), 0, Vector2.down, standardHitboxHeight/4 + 0.05f, environment);
+						hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, slidingHitboxHeight/2), 0, Vector2.up, slidingHitboxHeight/4 + 0.05f, environment);
 						if(hit.collider != null)
 						{
 							//transition to slidecontinue
 							state = State.SlideContinue;
-							if(facing == Facing.Left)
-							{
-								moveSpeed = -slideContinueSpeed;
-							}
-							else
-							{
-								moveSpeed = slideContinueSpeed;
-							}
+							moveSpeed = slideContinueSpeed;
 						}
 						else
 						{
@@ -347,13 +358,11 @@ public class Player : MonoBehaviour
 						collider.offset = new Vector2(collider.offset.x, 0);
 						animator.Play("MegaManJump", 0, 0);
 					}
-					
-					dashTimer -= Time.deltaTime/dashTime;
-					rb2d.MovePosition(Vector2.Lerp(dashStart, dashTarget, 1-dashTimer));
 				}
+				// When the slide ends
 				else
 				{
-					hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, standardHitboxHeight/2), 0, Vector2.down, standardHitboxHeight/4 + 0.05f, environment);
+					hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, slidingHitboxHeight/2), 0, Vector2.up, slidingHitboxHeight/4 + 0.05f, environment);
 					if(hit.collider != null)
 					{
 						state = State.SlideContinue;
@@ -376,6 +385,7 @@ public class Player : MonoBehaviour
 				}
 				break;
 			case State.SlideContinue:
+				canShoot = false;
 				gravity = normalGravity;
 				hit = Physics2D.BoxCast(transform.position, new Vector2(collider.size.x, standardHitboxHeight/2), 0, Vector2.up, standardHitboxHeight/4 + 0.05f, environment);
 				if(hit.collider != null)
@@ -506,6 +516,7 @@ public class Player : MonoBehaviour
 				
 				break;
 			case State.Hurt: // For some reason, knockback isn't working
+				canShoot = false;
 				gravity = normalGravity;
 				if(facing == Facing.Left)
 				{
@@ -530,6 +541,7 @@ public class Player : MonoBehaviour
 				}
 				break;
 			case State.Climb:
+				// Mega man should be able to shoot while climbing, so implement that later
 				moveSpeed = 0f;
 				gravity = 0f;
 				if(!touchingLadder)
@@ -609,7 +621,7 @@ public class Player : MonoBehaviour
 					animator.Play("MegaManNoCharge", 1, 0);
 					chargeTimer = 0;
 					weaponState = WeaponState.Default;
-					if(shotPool.poolCount() > 0 && chargeShot2Pool.poolCount() > 0 && chargeShot1Pool.poolCount() > 0)
+					if(canShoot && shotPool.poolCount() > 0 && chargeShot2Pool.poolCount() > 0 && chargeShot1Pool.poolCount() > 0)
 					{
 						CreateShot(shotPool, projectileSpeed);
 					}
@@ -627,7 +639,7 @@ public class Player : MonoBehaviour
 					animator.Play("MegaManNoCharge", 1, 0);
 					chargeTimer = 0;
 					weaponState = WeaponState.Default;
-					if(chargeShot1Pool.poolCount() > 0)
+					if(canShoot && chargeShot1Pool.poolCount() > 0)
 					{
 						CreateShot(chargeShot1Pool, chargeShot1Speed);
 					}
@@ -645,7 +657,7 @@ public class Player : MonoBehaviour
 					animator.Play("MegaManNoCharge", 1, 0);
 					chargeTimer = 0;
 					weaponState = WeaponState.Default;
-					if(chargeShot1Pool.poolCount() > 0)
+					if(canShoot && chargeShot1Pool.poolCount() > 0)
 					{
 						CreateShot(chargeShot1Pool, chargeShot1Speed);
 					}
@@ -663,7 +675,7 @@ public class Player : MonoBehaviour
 					animator.Play("MegaManNoCharge", 1, 0);
 					chargeTimer = 0;
 					weaponState = WeaponState.Default;
-					if(chargeShot1Pool.poolCount() > 0)
+					if(canShoot && chargeShot1Pool.poolCount() > 0)
 					{
 						CreateShot(chargeShot1Pool, chargeShot1Speed);
 					}
@@ -675,7 +687,7 @@ public class Player : MonoBehaviour
 					animator.Play("MegaManNoCharge", 1, 0);
 					chargeTimer = 0;
 					weaponState = WeaponState.Default;
-					if(chargeShot2Pool.poolCount() > 0)
+					if(canShoot && chargeShot2Pool.poolCount() > 0)
 					{
 						CreateShot(chargeShot2Pool, chargeShot2Speed);
 					}
@@ -846,16 +858,17 @@ public class Player : MonoBehaviour
 	}
 
 	// Mainly for sliding, but you continuously move, even when you release your move buttons
+	// Using lastPressed because you need to continue sliding, even when you release the movement buttons
 	private void SlideContinue()
 	{
-		if(Input.GetAxis("Horizontal") > 0)
+		if(lastPressed == Facing.Right)
 		{
-			xVelocity = slideContinueSpeed;
+			xVelocity = moveSpeed;
 			facing = Facing.Right;
 		}
-		else if(Input.GetAxis("Horizontal") < 0)
+		else if(lastPressed == Facing.Left)
 		{
-			xVelocity = -slideContinueSpeed;
+			xVelocity = -moveSpeed;
 			facing = Facing.Left;
 		}
 	}
@@ -877,6 +890,8 @@ public class Player : MonoBehaviour
 	
 	private void Shoot()
 	{
+		canShoot = true;
+
 		if(Input.GetButtonDown("Shoot") && shotPool.poolCount() > 0 && chargeShot2Pool.poolCount() > 0 && chargeShot1Pool.poolCount() > 0)
 		{
 			CreateShot(shotPool, projectileSpeed);
