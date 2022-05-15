@@ -95,7 +95,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d3f2783fe0b49324a9b81718caf68138, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 3066423124200191739}
   - component: {fileID: 3066423124200191740}
   - component: {fileID: 3066423124200191741}
+  - component: {fileID: 4147609107009964741}
   m_Layer: 12
   m_Name: Character
   m_TagString: Untagged
@@ -186,7 +187,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d3f2783fe0b49324a9b81718caf68138, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -251,34 +252,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3923055681029b4ab45ef1a72f71602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashDistance: 4.05
-  dashTime: 0.43
-  jumpBufferTime: 0.1
+  standardHitboxHeight: 1.4
+  normalGravity: 45
   runSpeed: 5.125
   stepSpeed: 2
-  jumpSpeed: 16
-  hurtSpeed: 1
-  gravity: 45
-  shootTime: 0.3
   walkStartTime: 0.075
-  walkAnimation: {fileID: 7400000, guid: 05c70b0a39d0f004eb52e7dad50e67e1, type: 2}
-  teleport: {fileID: 7400000, guid: b53066d4b0db677499cb776ac65dde9b, type: 2}
-  idleAnimation: {fileID: 7400000, guid: 7cddd1b90206539458c07937d8c27c57, type: 2}
-  hurtAnimation: {fileID: 7400000, guid: 9a8aa5fd63e81b44faea9a15971da818, type: 2}
+  dashDistance: 4.05
+  dashTime: 0.43
+  slideContinueSpeed: 8.7
+  slidingHitboxHeight: 0.7
+  jumpSpeed: 16
+  climbSpeed: 4.8
+  ladder:
+    serializedVersion: 2
+    m_Bits: 16384
+  shootTime: 0.3
   projectileSpeed: 15.8
   shotPool: {fileID: 3066423124880524440}
   chargeShot1Speed: 15.8
   chargeShot1Pool: {fileID: 3066423125178327189}
   chargeShot2Speed: 15.8
   chargeShot2Pool: {fileID: 3066423123251018003}
-  environment:
-    serializedVersion: 2
-    m_Bits: 8192
   charge0: 20
   charge1: 34
   charge2: 50
   charge3: 66
   charge4: 82
+  environment:
+    serializedVersion: 2
+    m_Bits: 8192
+  hurtSpeed: 1
+  walkAnimation: {fileID: 7400000, guid: 05c70b0a39d0f004eb52e7dad50e67e1, type: 2}
+  teleport: {fileID: 7400000, guid: b53066d4b0db677499cb776ac65dde9b, type: 2}
+  idleAnimation: {fileID: 7400000, guid: 7cddd1b90206539458c07937d8c27c57, type: 2}
+  hurtAnimation: {fileID: 7400000, guid: 9a8aa5fd63e81b44faea9a15971da818, type: 2}
 --- !u!61 &3066423124200191719
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -350,6 +357,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   child: {fileID: 3066423123428419000}
+--- !u!114 &4147609107009964741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3066423124200191717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186f699648cb50b4d9969eec7d67904c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3066423124880524423
 GameObject:
   m_ObjectHideFlags: 0

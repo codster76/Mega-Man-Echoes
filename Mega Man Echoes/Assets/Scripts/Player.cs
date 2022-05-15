@@ -6,92 +6,95 @@ public class Player : MonoBehaviour
 {
 	private Rigidbody2D rb2d;
 	private BoxCollider2D collider;
-	
-	public float dashDistance = 4.05f;
-	public float dashTime = 0.43f;
-	private float dashTimer;
-	
-	enum Facing
-	{
-		Left,
-		Right
-	};
+	private Animator animator;
+	private SpriteRenderer sprite;
+	private RaycastHit2D hit;
+
+	// States
 	private Facing facing;
 	private Facing lastPressed;
-	
-	private Vector2 dashTarget;
-	private Vector2 dashStart;
-	
-	private bool onGround;
-	private bool hitCeiling;
+	private WeaponState weaponState;
+	private State state;
 	
 	private float yVelocity;
 	private float xVelocity;
-	
-	private float moveSpeed; // Current movement speed
-	public float runSpeed = 5.125f; // Regular movement speed
-	public float stepSpeed; // Speed before accelerating to full speed
-	public float jumpSpeed = 16f; // Speed of jumping
-	public float hurtSpeed; // Speed while being knocked back
-	public float climbSpeed = 4.8f;
+	private float moveSpeed; // Current movement speed (always modify this instead of the xVelocity directly)
 
-	public float standardHitboxHeight;
-	public float slidingHitboxHeight; // The hitbox also needs to be offset downwards by half of this value
-	public float slideContinueSpeed; // If a slide needs to continue past its regular distance, it uses this speed instead (lerp is used for normal sliding, so it can't use this)
-	
+	[Header("General")]
+	public float standardHitboxHeight = 1.4f; // The size of Mega Man's normal hitbox
+	public float normalGravity = 45f; // Standard fall speed
 	private float gravity;
-	public float normalGravity = 45f;
-	
-	private bool shooting;
-	public float shootTime = 0.3f;
-	private float shootTimer;
-	
-	public float walkStartTime = 0.075f;
-	private float walkStartTimer;
-	
-	private Animator animator;
-	private SpriteRenderer sprite;
-	
-	public AnimationClip walkAnimation;
-	public AnimationClip teleport;
-	public AnimationClip idleAnimation;
-	public AnimationClip hurtAnimation;
-	
-	private float walkTimer;
 	private float teleportTimer;
 	private float idleTimer;
-	
-	private float hurtTimer;
-	
-	public float projectileSpeed;
-	public ObjectPoolClass shotPool;
-	
-	public float chargeShot1Speed;
-	public ObjectPoolClass chargeShot1Pool;
-	
-	public float chargeShot2Speed;
-	public ObjectPoolClass chargeShot2Pool;
-	private bool canShoot;
 
+	[Header("Walking")]
+	public float runSpeed = 5.125f; // Regular movement speed
+	public float stepSpeed; // Speed before accelerating to full speed
+	public float walkStartTime = 0.075f; // How long you spend in the walk start state (to enable Mega Man's little step animation)
+	private float walkStartTimer;
+	private float walkTimer;
+
+	[Header("Sliding")]
+	public float dashDistance = 4.05f;
+	public float dashTime = 0.43f;
+	public float slideContinueSpeed = 8.7f; // If a slide needs to continue past its regular distance, it uses this speed instead (lerp is used for normal sliding, so it can't use this)
+	public float slidingHitboxHeight = 0.7f; // The hitbox also needs to be offset downwards by half of this value
+	private Vector2 dashTarget; // Used for sliding interpolation
+	private Vector2 dashStart; // Used for sliding interpolation
+	private float dashTimer;
+
+	[Header("Jumping")]
+	public float jumpSpeed = 16f; // Jump height
+
+	[Header("Climbing")]
+	public float climbSpeed = 4.8f;
 	private bool touchingLadder;
 	private bool ladderTop;
 	private bool ladderVeryTop;
-	private bool groundTest;
-	
-	public LayerMask environment;
-	public LayerMask ladder;
-	
 	private float ladderPos = 0;
 	private Vector3 ladderTopPosition;
-	private RaycastHit2D hit;
-	
-	private float chargeTimer;
-	
+	public LayerMask ladder;
+
+	[Header("Shooting")]
+	public float shootTime = 0.3f; // How long to spend in the shooting pose
+	private bool shooting;
+	private float shootTimer;
+	public float projectileSpeed = 15.8f;
+	public ObjectPoolClass shotPool;
+	public float chargeShot1Speed = 15.8f;
+	public ObjectPoolClass chargeShot1Pool;
+	public float chargeShot2Speed = 15.8f;
+	public ObjectPoolClass chargeShot2Pool;
+	private bool canShoot; // Modified on during any state where Mega Man can't shoot (like when he's sliding)
+
+	// These variables determine how long to spend at each charge level
 	public float charge0 = 20f;
 	public float charge1 = 34f;
 	public float charge2 = 50f;
 	public float charge3 = 66f;
 	public float charge4 = 82f;
+	private float chargeTimer;
+
+	[Header("Collision")]
+	private bool onGround;
+	private bool hitCeiling;
+	public LayerMask environment;
+
+	[Header("Hurt")]
+	public float hurtSpeed; // Speed while being knocked back
+	private float hurtTimer;
+	
+	[Header("Animations")]
+	public AnimationClip walkAnimation;
+	public AnimationClip teleport;
+	public AnimationClip idleAnimation;
+	public AnimationClip hurtAnimation;
+
+	enum Facing
+	{
+		Left,
+		Right
+	};
 	
 	enum State
 	{
@@ -107,8 +110,6 @@ public class Player : MonoBehaviour
 		Climb
 	};
 	
-	private State state;
-	
 	enum WeaponState
 	{
 		Default,
@@ -118,8 +119,6 @@ public class Player : MonoBehaviour
 		Charge3,
 		Charge4
 	}
-	
-	private WeaponState weaponState;
 	
 	// Things I need to do
 	/*
