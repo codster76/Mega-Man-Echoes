@@ -6821,24 +6821,6 @@ Transform:
   m_Father: {fileID: 1680964552}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1852637152 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3066423124200191717, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-    type: 3}
-  m_PrefabInstance: {fileID: 3066423123499980424}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1852637153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852637152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 186f699648cb50b4d9969eec7d67904c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3066423123499980424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6958,33 +6940,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3066423124200191738, guid: 23e60384b5d916d4880614d8fbb0b7e5,
         type: 3}
-      propertyPath: climbSpeed
-      value: 4.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423124200191738, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: ladder.m_Bits
-      value: 16384
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423124200191738, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: slideContinueSpeed
-      value: 8.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423124200191738, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: slidingHitboxHeight
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423124200191738, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
       propertyPath: slidingHitboxOffset
       value: -0.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066423124200191738, guid: 23e60384b5d916d4880614d8fbb0b7e5,
-        type: 3}
-      propertyPath: standardHitboxHeight
-      value: 1.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23e60384b5d916d4880614d8fbb0b7e5, type: 3}

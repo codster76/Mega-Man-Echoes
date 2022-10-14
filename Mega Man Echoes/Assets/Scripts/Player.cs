@@ -867,7 +867,7 @@ public class Player : MonoBehaviour
 		}
 		else if(lastPressed == Facing.Left)
 		{
-			xVelocity = -moveSpeed;
+			xVelocity = moveSpeed;
 			facing = Facing.Left;
 		}
 	}
