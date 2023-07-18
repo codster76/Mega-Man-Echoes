@@ -858,6 +858,8 @@ public class Player : MonoBehaviour
 
 	// Mainly for sliding, but you continuously move, even when you release your move buttons
 	// Using lastPressed because you need to continue sliding, even when you release the movement buttons
+
+	// NOTE: There is an issue where you continue sliding in the same direction, even if you press the opposite direction
 	private void SlideContinue()
 	{
 		if(lastPressed == Facing.Right)
