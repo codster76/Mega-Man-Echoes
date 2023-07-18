@@ -50,10 +50,11 @@ public class Player : MonoBehaviour
 	[Header("Climbing")]
 	public float climbSpeed = 4.8f;
 	private bool touchingLadder;
-	private bool ladderTop;
-	private bool ladderVeryTop;
-	private float ladderPos = 0;
-	private Vector3 ladderTopPosition;
+	private bool ladderTop = false;
+	private bool ladderVeryTop = false;
+	private bool standingOnTopOfLadder = false;
+	private Vector2 ladderTopPosition;
+	private Vector2 climbDownPosition;
 	public LayerMask ladder;
 
 	[Header("Shooting")]
@@ -189,6 +190,7 @@ public class Player : MonoBehaviour
 				break;
 			case State.Default:
 				Shoot();
+				Climb();
 				gravity = normalGravity;
 				
 				// Idle animation is a bit buggy (seems to be a lot shorter in the animator than the animation length indicates), so fix it later
@@ -236,24 +238,13 @@ public class Player : MonoBehaviour
 					animator.Play("MegaManJump", 0, 0);
 				}
 				
-				// Climbing
-				if(Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 0)
-				{
-					if(touchingLadder)
-					{
-						animator.Play("MegaManClimb", 0, 0);
-						state = State.Climb;
-						xVelocity = 0;
-						transform.position = new Vector3(ladderPos, transform.position.y, transform.position.z);
-					}
-				}
-				
 				break;
 			case State.Jump:
 				moveSpeed = runSpeed;
 				gravity = normalGravity;
 				Move(); // Allow horizontal movement while jumping
 				Shoot();
+				Climb();
 				
 				// Cancels jumps when the jump button is released
 				// Unfortunately, it has to be GetButton because GetButtonUp sometimes gets eaten
@@ -276,18 +267,6 @@ public class Player : MonoBehaviour
 					state = State.Walk;
 					walkTimer = 0;
 					animator.Play("MegaManWalk", 0, 0);
-				}
-				
-				// Climbing
-				if(Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 0)
-				{
-					if(touchingLadder)
-					{
-						animator.Play("MegaManClimb", 0, 0);
-						state = State.Climb;
-						xVelocity = 0;
-						transform.position = new Vector3(ladderPos, transform.position.y, transform.position.z);
-					}
 				}
 				
 				break;
@@ -407,6 +386,7 @@ public class Player : MonoBehaviour
 				gravity = normalGravity;
 				Move();
 				Shoot();
+				Climb();
 				
 				// Go back to default state if you stop moving
 				if(Input.GetAxis("Horizontal") == 0)
@@ -444,24 +424,13 @@ public class Player : MonoBehaviour
 					animator.Play("MegaManWalk", 0, 0);
 				}
 				
-				// Climbing
-				if(Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 0)
-				{
-					if(touchingLadder)
-					{
-						animator.Play("MegaManClimb", 0, 0);
-						state = State.Climb;
-						xVelocity = 0;
-						transform.position = new Vector3(ladderPos, transform.position.y, transform.position.z);
-					}
-				}
-				
 				break;
 			case State.Walk:
 				moveSpeed = runSpeed;
 				gravity = normalGravity;
 				Move();
 				Shoot();
+				Climb();
 				
 				// To track animation time (normalised time doesn't do it properly when you're constantly switching states)
 				walkTimer += Time.deltaTime;
@@ -502,18 +471,6 @@ public class Player : MonoBehaviour
 				{
 					state = State.Jump;
 					animator.Play("MegaManJump", 0, 0);
-				}
-				
-				// Climbing
-				if(Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 0)
-				{
-					if(touchingLadder)
-					{
-						animator.Play("MegaManClimb", 0, 0);
-						state = State.Climb;
-						xVelocity = 0;
-						transform.position = new Vector3(ladderPos, transform.position.y, transform.position.z); // Centres you on the ladder
-					}
 				}
 				
 				break;
@@ -563,13 +520,9 @@ public class Player : MonoBehaviour
 					//Issue: this resets the climbing animation whenever the player isn't at the top of the ladder
 					animator.Play("MegaManClimb", 0, 0);
 				}
-				
-				if(ladderVeryTop)
-				{
+
+				if(ladderVeryTop) {
 					transform.position = ladderTopPosition;
-					onGround = true;
-					state = State.Default;
-					animator.Play("MegaManIdle", 0, 0);
 				}
 				
 				if(Input.GetAxis("Vertical") < 0)
@@ -731,21 +684,48 @@ public class Player : MonoBehaviour
 	
 	void FixedUpdate()
 	{
-		// Ladder detection (I want to detect ladders from the centre of mega man, rather than using his whole collider)
-		hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y-collider.size.y/2), Vector2.up, collider.size.y/2, ladder);
+		// Standing in ladder (I want to detect ladders from the centre of mega man, rather than using his whole collider)
+		hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - collider.size.y/2), Vector2.up, collider.size.y/2, ladder);
 		if(hit.collider != null)
 		{
 			if(hit.collider.gameObject.tag == "Ladder")
 			{
 				touchingLadder = true;
-				ladderPos = hit.collider.transform.position.x;
+				ladderTopPosition = new Vector2(hit.collider.transform.position.x, hit.collider.transform.position.y + hit.collider.transform.localScale.y/2 + collider.size.y/2 + 0.01f);
+
+				if(hit.collider.transform.position.y + hit.collider.transform.localScale.y/2 - collider.size.y/3 < transform.position.y && hit.collider.transform.position.y + hit.collider.transform.localScale.y/2 > transform.position.y) {
+					ladderTop = true;
+					ladderVeryTop = false;
+				} else if(hit.collider.transform.position.y + hit.collider.transform.localScale.y/2 < transform.position.y) {
+					ladderTop = false;
+					ladderVeryTop = true;
+				}
 			}
 		}
 		else
 		{
 			touchingLadder = false;
+			ladderTop = false;
+			ladderVeryTop = false;
+		}
+
+		// Climbing down from on top of a ladder
+		hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y-collider.size.y/2), Vector2.down, 0.1f, ladder);
+		if(hit.collider != null)
+		{
+			float highestPointOnLadder = hit.collider.transform.position.y + hit.collider.transform.localScale.y/2;
+			climbDownPosition = new Vector2(hit.collider.transform.position.x, highestPointOnLadder - 0.3f);
+
+			// If you are above the ladder
+			if(hit.collider.gameObject.tag == "Ladder" && transform.position.y > highestPointOnLadder)
+			{
+				standingOnTopOfLadder = true;
+			}
+		} else {
+			standingOnTopOfLadder = false;
 		}
 		
+		// On the ground
 		// There's a potential problem with floating point errors where this raycast can't detect the ground when standing on corners. Seems to be fixed, but keep an eye on it.
 		// The +0.05f is just to make sure the boxcast can detect the ground. Collisions in unity aren't completely perfect, so I need to check slightly outside the collider for the ground.
 		hit = Physics2D.BoxCast(new Vector3(transform.position.x + collider.offset.x, transform.position.y + collider.offset.y, transform.position.z), new Vector2(collider.size.x, collider.size.y/2), 0, Vector2.down, collider.size.y/4 + 0.05f, environment);
@@ -762,6 +742,7 @@ public class Player : MonoBehaviour
 			onGround = false;
 		}
 		
+		// When you hit your head on a ceiling
 		hit = Physics2D.BoxCast(new Vector3(transform.position.x + collider.offset.x, transform.position.y + collider.offset.y, transform.position.z), new Vector2(collider.size.x, collider.size.y/2), 0, Vector2.up, collider.size.y/4 + 0.05f, environment);
 		if(hit.collider != null)
 		{
@@ -791,30 +772,6 @@ public class Player : MonoBehaviour
 			xVelocity = 0;
 			hurtTimer = hurtAnimation.length;
 			StopJump();
-		}
-		
-		if(c.gameObject.tag == "Ladder Top")
-		{
-			ladderTop = true;
-		}
-		
-		if(c.gameObject.tag == "Ladder Very Top")
-		{
-			ladderTopPosition = c.gameObject.transform.position; // When you touch the top of the ladder, it saves the position to teleport you there to avoid that weird jump at the top of every ladder
-			ladderVeryTop = true;
-		}
-	}
-	
-	void OnTriggerExit2D(Collider2D c)
-	{
-		if(c.gameObject.tag == "Ladder Top")
-		{
-			ladderTop = false;
-		}
-		
-		if(c.gameObject.tag == "Ladder Very Top")
-		{
-			ladderVeryTop = false;
 		}
 	}
 	
@@ -859,10 +816,7 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	// Mainly for sliding, but you continuously move, even when you release your move buttons
 	// Using lastPressed because you need to continue sliding, even when you release the movement buttons
-
-	// NOTE: There is an issue where you continue sliding in the same direction, even if you press the opposite direction
 	private void SlideContinue()
 	{
 		if(initialSlideContinue == Facing.Right) {
@@ -926,6 +880,22 @@ public class Player : MonoBehaviour
 		if(Input.GetButton("Shoot"))
 		{
 			chargeTimer += Time.deltaTime * 60;
+		}
+	}
+
+	private void Climb() {
+		if(touchingLadder) {
+			if(Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 0)
+			{
+				animator.Play("MegaManClimb", 0, 0);
+				state = State.Climb;
+				xVelocity = 0;
+				transform.position = new Vector2(ladderTopPosition.x, transform.position.y);
+			}
+		} else if(standingOnTopOfLadder) {
+			if(Input.GetAxis("Vertical") < 0) {
+				transform.position = climbDownPosition;
+			}
 		}
 	}
 	
