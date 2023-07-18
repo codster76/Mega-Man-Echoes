@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
 	private Vector2 dashTarget; // Used for sliding interpolation
 	private Vector2 dashStart; // Used for sliding interpolation
 	private float dashTimer;
+	private Facing initialSlideContinue; // When you enter the slide continue state, it needs to know which way you're facing so it can flip you properly.
 
 	[Header("Jumping")]
 	public float jumpSpeed = 16f; // Jump height
@@ -57,7 +58,7 @@ public class Player : MonoBehaviour
 
 	[Header("Shooting")]
 	public float shootTime = 0.3f; // How long to spend in the shooting pose
-	private bool shooting;
+	private bool shooting; // Necessary for simultaneous walking + shooting
 	private float shootTimer;
 	public float projectileSpeed = 15.8f;
 	public ObjectPoolClass shotPool;
@@ -184,7 +185,6 @@ public class Player : MonoBehaviour
 				{
 					sprite.enabled = true;
 					state = State.Default;
-					animator.Play("MegaManIdle", 0, 0);
 				}
 				break;
 			case State.Default:
@@ -320,6 +320,7 @@ public class Player : MonoBehaviour
 						{
 							//transition to slidecontinue
 							state = State.SlideContinue;
+							initialSlideContinue = facing;
 							moveSpeed = -slideContinueSpeed;
 						}
 						else
@@ -337,6 +338,7 @@ public class Player : MonoBehaviour
 						{
 							//transition to slidecontinue
 							state = State.SlideContinue;
+							initialSlideContinue = facing;
 							moveSpeed = slideContinueSpeed;
 						}
 						else
@@ -365,6 +367,7 @@ public class Player : MonoBehaviour
 					if(hit.collider != null)
 					{
 						state = State.SlideContinue;
+						initialSlideContinue = facing;
 						if(facing == Facing.Left)
 						{
 							moveSpeed = -slideContinueSpeed;
@@ -862,15 +865,28 @@ public class Player : MonoBehaviour
 	// NOTE: There is an issue where you continue sliding in the same direction, even if you press the opposite direction
 	private void SlideContinue()
 	{
-		if(lastPressed == Facing.Right)
-		{
-			xVelocity = moveSpeed;
-			facing = Facing.Right;
-		}
-		else if(lastPressed == Facing.Left)
-		{
-			xVelocity = moveSpeed;
-			facing = Facing.Left;
+		if(initialSlideContinue == Facing.Right) {
+			if(lastPressed == Facing.Right)
+			{
+				xVelocity = moveSpeed;
+				facing = Facing.Right;
+			}
+			else if(lastPressed == Facing.Left)
+			{
+				xVelocity = -moveSpeed;
+				facing = Facing.Left;
+			}
+		} else {
+			if(lastPressed == Facing.Right)
+			{
+				xVelocity = -moveSpeed;
+				facing = Facing.Right;
+			}
+			else if(lastPressed == Facing.Left)
+			{
+				xVelocity = moveSpeed;
+				facing = Facing.Left;
+			}
 		}
 	}
 	
